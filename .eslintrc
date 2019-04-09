@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "standard", 
+    "standard-react", 
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "space-before-function-paren": "off",
+    "react/prop-types": "off"
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "jest": true,
+    "browser": true
+  }
+}
