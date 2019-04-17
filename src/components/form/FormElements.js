@@ -49,9 +49,7 @@ const FormElements = () => {
   const [dialogVisible, setDialogVisible] = useState(false)
 
   // Component did mount
-  useEffect(() => {
-    CountryService.getCountries(setCountriesData)
-  }, [])
+  useEffect(() => CountryService.getCountries(setCountriesData), [])
 
   const filterCountry = ({ query }) => {
     const results = countriesData.filter(({ name }) => {

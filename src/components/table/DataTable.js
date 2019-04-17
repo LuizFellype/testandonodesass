@@ -9,9 +9,10 @@ const Table = () => {
   const [dataTableValue, setDataTableValue] = useState([])
   const [dataTableSelection, setDataTableSelection] = useState(null)
 
-  useEffect(() => {
-    CarService.getCarsSmall().then(data => setDataTableValue(data))
-  }, [])
+  useEffect(
+    () => CarService.getCarsSmall().then(data => setDataTableValue(data)),
+    []
+  )
 
   return (
     <div className='card card-w-title'>
