@@ -14,10 +14,9 @@ const View = () => {
   const [layout, setLayout] = useState('list')
 
   // Component did mount
-  useEffect(
-    () => CarService.getCarsLarge().then(data => setDataViewValue(data)),
-    []
-  )
+  useEffect(() => {
+    CarService.getCarsLarge().then(data => setDataViewValue(data))
+  }, [])
 
   const dataViewItemTemplate = (car, layout) => {
     if (!car) {

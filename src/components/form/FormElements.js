@@ -49,7 +49,9 @@ const FormElements = () => {
   const [dialogVisible, setDialogVisible] = useState(false)
 
   // Component did mount
-  useEffect(() => CountryService.getCountries(setCountriesData), [])
+  useEffect(() => {
+    CountryService.getCountries(setCountriesData)
+  }, [])
 
   const filterCountry = ({ query }) => {
     const results = countriesData.filter(({ name }) => {
@@ -114,9 +116,10 @@ const FormElements = () => {
             suggestions={filteredCountries}
             completeMethod={filterCountry}
             value={country}
-            onChange={({ value }) =>
-              setCountry(value) && setFilteredCountries(null)
-            }
+            onChange={({ value }) => {
+              setCountry(value)
+              setFilteredCountries(null)
+            }}
           />
         </div>
         <div className='p-col-12 p-md-2'>
