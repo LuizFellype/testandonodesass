@@ -4,7 +4,6 @@ import { NodeService } from '../service/NodeService'
 import { Tree } from 'primereact/tree'
 import { Menu } from 'primereact/menu'
 import { PanelMenu } from 'primereact/panelmenu'
-import { PickList } from 'primereact/picklist'
 import { OrderList } from 'primereact/orderlist'
 import { Accordion, AccordionTab } from 'primereact/accordion'
 import { Panel } from 'primereact/panel'
@@ -14,6 +13,7 @@ import { ProgressBar } from 'primereact/progressbar'
 import FormElements from './form/FormElements'
 import DataTable from './table/DataTable'
 import DataView from './dataView/DataView'
+import PickList from './pick/Pick'
 
 export class SampleDemo extends Component {
   constructor() {
@@ -23,8 +23,6 @@ export class SampleDemo extends Component {
       selectedNodeKey: null,
       checkboxValue: [],
       treeData: [],
-      picklistSourceCars: [],
-      picklistTargetCars: [],
       orderlistCars: [],
       menuItems: [
         {
@@ -187,9 +185,6 @@ export class SampleDemo extends Component {
       .then(nodes => this.setState({ treeData: nodes }))
     this.carService
       .getCarsSmall()
-      .then(data => this.setState({ picklistSourceCars: data }))
-    this.carService
-      .getCarsSmall()
       .then(data => this.setState({ orderlistCars: data }))
   }
 
@@ -245,23 +240,7 @@ export class SampleDemo extends Component {
 
           <DataView />
           <div className='p-col-12 p-lg-6'>
-            <div className='card card-w-title'>
-              <h1>PickList</h1>
-              <PickList
-                source={this.state.picklistSourceCars}
-                target={this.state.picklistTargetCars}
-                sourceHeader='Available'
-                targetHeader='Selected'
-                responsive
-                itemTemplate={car => <span>{car.brand}</span>}
-                onChange={event =>
-                  this.setState({
-                    picklistSourceCars: event.source,
-                    picklistTargetCars: event.target
-                  })
-                }
-              />
-            </div>
+            <PickList />
 
             <div className='card card-w-title'>
               <h1>OrderList</h1>
