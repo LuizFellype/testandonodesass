@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { CarService } from '../service/CarService'
 import { NodeService } from '../service/NodeService'
 import { InputText } from 'primereact/inputtext'
-import { DataTable } from 'primereact/datatable'
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview'
 import { Tree } from 'primereact/tree'
 import { Menu } from 'primereact/menu'
@@ -14,9 +13,9 @@ import { Accordion, AccordionTab } from 'primereact/accordion'
 import { Panel } from 'primereact/panel'
 import { TabView, TabPanel } from 'primereact/tabview'
 import { ProgressBar } from 'primereact/progressbar'
-import { Column } from 'primereact/column'
 
 import FormElements from './form/FormElements'
+import DataTable from './table/DataTable'
 
 export class SampleDemo extends Component {
   constructor() {
@@ -25,8 +24,6 @@ export class SampleDemo extends Component {
       countriesData: [],
       selectedNodeKey: null,
       checkboxValue: [],
-      dataTableValue: [],
-      dataTableSelection: null,
       dataViewValue: [],
       treeData: [],
       picklistSourceCars: [],
@@ -191,9 +188,6 @@ export class SampleDemo extends Component {
 
   componentDidMount() {
     this.carService
-      .getCarsSmall()
-      .then(data => this.setState({ dataTableValue: data }))
-    this.carService
       .getCarsLarge()
       .then(data => this.setState({ dataViewValue: data }))
     this.nodeService
@@ -333,24 +327,7 @@ export class SampleDemo extends Component {
             </div>
 
             <FormElements />
-
-            <div className='card card-w-title'>
-              <h1>DataTable</h1>
-              <DataTable
-                value={this.state.dataTableValue}
-                selectionMode='single'
-                header='DataTable'
-                selection={this.state.dataTableSelection}
-                onSelectionChange={event =>
-                  this.setState({ dataTableSelection: event.value })
-                }
-              >
-                <Column field='vin' header='Vin' sortable />
-                <Column field='year' header='Year' sortable />
-                <Column field='brand' header='Brand' sortable />
-                <Column field='color' header='Color' sortable />
-              </DataTable>
-            </div>
+            <DataTable />
           </div>
           <div className='p-col-12'>
             <div className='card card-w-title'>
