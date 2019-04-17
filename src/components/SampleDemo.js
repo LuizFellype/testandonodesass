@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { CarService } from '../service/CarService'
 import { NodeService } from '../service/NodeService'
-import { InputText } from 'primereact/inputtext'
-import { DataView, DataViewLayoutOptions } from 'primereact/dataview'
 import { Tree } from 'primereact/tree'
 import { Menu } from 'primereact/menu'
 import { PanelMenu } from 'primereact/panelmenu'
 import { PickList } from 'primereact/picklist'
 import { OrderList } from 'primereact/orderlist'
-import { Button } from 'primereact/button'
 import { Accordion, AccordionTab } from 'primereact/accordion'
 import { Panel } from 'primereact/panel'
 import { TabView, TabPanel } from 'primereact/tabview'
@@ -16,6 +13,7 @@ import { ProgressBar } from 'primereact/progressbar'
 
 import FormElements from './form/FormElements'
 import DataTable from './table/DataTable'
+import DataView from './dataView/DataView'
 
 export class SampleDemo extends Component {
   constructor() {
@@ -24,12 +22,10 @@ export class SampleDemo extends Component {
       countriesData: [],
       selectedNodeKey: null,
       checkboxValue: [],
-      dataViewValue: [],
       treeData: [],
       picklistSourceCars: [],
       picklistTargetCars: [],
       orderlistCars: [],
-      layout: 'list',
       menuItems: [
         {
           label: 'Options',
@@ -182,14 +178,10 @@ export class SampleDemo extends Component {
     this.carService = new CarService()
     this.nodeService = new NodeService()
 
-    this.dataViewItemTemplate = this.dataViewItemTemplate.bind(this)
     this.orderListTemplate = this.orderListTemplate.bind(this)
   }
 
   componentDidMount() {
-    this.carService
-      .getCarsLarge()
-      .then(data => this.setState({ dataViewValue: data }))
     this.nodeService
       .getTreeNodes(this)
       .then(nodes => this.setState({ treeData: nodes }))
@@ -224,86 +216,7 @@ export class SampleDemo extends Component {
     )
   }
 
-  dataViewItemTemplate(car, layout) {
-    if (!car) {
-      return
-    }
-
-    let src = 'assets/demo/images/car/' + car.brand + '.png'
-
-    if (layout === 'list') {
-      return (
-        <div
-          className='p-grid'
-          style={{ padding: '2em', borderBottom: '1px solid #d9d9d9' }}
-        >
-          <div className='p-col-12 p-md-3'>
-            <img src={src} alt={car.brand} />
-          </div>
-          <div className='p-col-12 p-md-8 car-details'>
-            <div className='p-grid'>
-              <div className='p-col-2 p-sm-6'>Vin:</div>
-              <div className='p-col-10 p-sm-6'>{car.vin}</div>
-
-              <div className='p-col-2 p-sm-6'>Year:</div>
-              <div className='p-col-10 p-sm-6'>{car.year}</div>
-
-              <div className='p-col-2 p-sm-6'>Brand:</div>
-              <div className='p-col-10 p-sm-6'>{car.brand}</div>
-
-              <div className='p-col-2 p-sm-6'>Color:</div>
-              <div className='p-col-10 p-sm-6'>{car.color}</div>
-            </div>
-          </div>
-
-          <div
-            className='p-col-12 p-md-1 search-icon'
-            style={{ marginTop: '40px' }}
-          >
-            <Button icon='pi pi-search' />
-          </div>
-        </div>
-      )
-    }
-
-    if (layout === 'grid') {
-      return (
-        <div style={{ padding: '.5em' }} className='p-col-12 p-md-3'>
-          <Panel header={car.vin} style={{ textAlign: 'center' }}>
-            <img
-              src={`assets/demo/images/car/${car.brand}.png`}
-              alt={car.brand}
-            />
-            <div className='car-detail'>
-              {car.year} - {car.color}
-            </div>
-            <i className='pi pi-search' style={{ cursor: 'pointer' }} />
-          </Panel>
-        </div>
-      )
-    }
-  }
-
   render() {
-    const dataViewHeader = (
-      <div className='p-grid'>
-        <div className='p-col-6 p-md-8 filter-container'>
-          <div style={{ position: 'relative' }}>
-            <InputText
-              placeholder='Search by brand'
-              onKeyUp={e => this.dv.filter(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className='p-col-6 p-md-4' style={{ textAlign: 'right' }}>
-          <DataViewLayoutOptions
-            layout={this.state.layout}
-            onChange={e => this.setState({ layout: e.value })}
-          />
-        </div>
-      </div>
-    )
-
     return (
       <div className='p-fluid'>
         <div className='p-grid'>
@@ -329,22 +242,8 @@ export class SampleDemo extends Component {
             <FormElements />
             <DataTable />
           </div>
-          <div className='p-col-12'>
-            <div className='card card-w-title'>
-              <h1>DataView</h1>
-              <DataView
-                ref={el => (this.dv = el)}
-                value={this.state.dataViewValue}
-                filterBy='brand'
-                itemTemplate={this.dataViewItemTemplate}
-                paginatorPosition='both'
-                paginator
-                rows={10}
-                header={dataViewHeader}
-                layout={this.state.layout}
-              />
-            </div>
-          </div>
+
+          <DataView />
           <div className='p-col-12 p-lg-6'>
             <div className='card card-w-title'>
               <h1>PickList</h1>
