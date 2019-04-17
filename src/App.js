@@ -18,7 +18,7 @@ import { MiscDemo } from './components/MiscDemo'
 import { EmptyPage } from './components/EmptyPage'
 import { Documentation } from './components/Documentation'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
-import LoginPage from './components/auth/Login'
+import LoginPage from './pages/auth/Login'
 import 'primereact/resources/themes/nova-light/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
@@ -234,7 +234,7 @@ class App extends Component {
 
   removeClass(element, className) {
     if (element.classList) element.classList.remove(className)
-    else
+    else {
       element.className = element.className.replace(
         new RegExp(
           '(^|\\b)' + className.split(' ').join('|') + '(\\b|$)',
@@ -242,6 +242,7 @@ class App extends Component {
         ),
         ' '
       )
+    }
   }
 
   isDesktop() {
@@ -249,9 +250,9 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.mobileMenuActive)
+    if (this.state.mobileMenuActive) {
       this.addClass(document.body, 'body-overflow-hidden')
-    else this.removeClass(document.body, 'body-overflow-hidden')
+    } else this.removeClass(document.body, 'body-overflow-hidden')
   }
 
   renderApp = () => {
