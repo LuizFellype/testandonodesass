@@ -19,3 +19,5 @@ export class CarService {
       .then(res => res.data.data)
   }
 }
+
+export default new CarService()
