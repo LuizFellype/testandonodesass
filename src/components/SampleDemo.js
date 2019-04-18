@@ -4,7 +4,6 @@ import { NodeService } from '../service/NodeService'
 import { Tree } from 'primereact/tree'
 import { Menu } from 'primereact/menu'
 import { PanelMenu } from 'primereact/panelmenu'
-import { OrderList } from 'primereact/orderlist'
 import { Accordion, AccordionTab } from 'primereact/accordion'
 import { Panel } from 'primereact/panel'
 import { TabView, TabPanel } from 'primereact/tabview'
@@ -14,6 +13,7 @@ import FormElements from './form/FormElements'
 import DataTable from './table/DataTable'
 import DataView from './dataView/DataView'
 import PickList from './pick/Pick'
+import OrderList from './orderList/OrderList'
 
 export class SampleDemo extends Component {
   constructor() {
@@ -23,7 +23,6 @@ export class SampleDemo extends Component {
       selectedNodeKey: null,
       checkboxValue: [],
       treeData: [],
-      orderlistCars: [],
       menuItems: [
         {
           label: 'Options',
@@ -175,40 +174,12 @@ export class SampleDemo extends Component {
 
     this.carService = new CarService()
     this.nodeService = new NodeService()
-
-    this.orderListTemplate = this.orderListTemplate.bind(this)
   }
 
   componentDidMount() {
     this.nodeService
       .getTreeNodes(this)
       .then(nodes => this.setState({ treeData: nodes }))
-    this.carService
-      .getCarsSmall()
-      .then(data => this.setState({ orderlistCars: data }))
-  }
-
-  orderListTemplate(car) {
-    if (!car) {
-      return
-    }
-
-    return (
-      <div className='p-clearfix'>
-        <img
-          src={`assets/demo/images/car/${car.brand}.png`}
-          alt={car.brand}
-          style={{
-            display: 'inline-block',
-            margin: '2px 0 2px 2px',
-            width: '50px'
-          }}
-        />
-        <div style={{ fontSize: 14, float: 'right', margin: '15px 5px 0 0' }}>
-          {car.brand} - {car.year} - {car.color}
-        </div>
-      </div>
-    )
   }
 
   render() {
@@ -239,22 +210,10 @@ export class SampleDemo extends Component {
           </div>
 
           <DataView />
+
           <div className='p-col-12 p-lg-6'>
             <PickList />
-
-            <div className='card card-w-title'>
-              <h1>OrderList</h1>
-              <OrderList
-                value={this.state.orderlistCars}
-                responsive
-                header='OrderList'
-                listStyle={{ height: 250 }}
-                itemTemplate={this.orderListTemplate}
-                onChange={event =>
-                  this.setState({ orderlistCars: event.value })
-                }
-              />
-            </div>
+            <OrderList />
 
             <div className='card card-w-title'>
               <h1>ProgressBar</h1>
