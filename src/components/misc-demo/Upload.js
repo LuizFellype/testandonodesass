@@ -8,7 +8,7 @@ const Upload = () => {
   const growl = useRef(null)
 
   const onUpload = () => {
-    growl.show({
+    growl.current.show({
       severity: 'info',
       summary: 'Success',
       detail: 'File Uploaded'
