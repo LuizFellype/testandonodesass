@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import { CarService } from '../service/CarService'
-import { NodeService } from '../service/NodeService'
-import { Tree } from 'primereact/tree'
 import { Menu } from 'primereact/menu'
 
 import FormElements from './form/FormElements'
@@ -14,15 +11,12 @@ import PanelMenu from './menu/PanelMenu'
 import AccordionPanel from './accordion/AccordionPanel'
 import TabView from './tab/TabView'
 import Panel from './panel/Panel'
+import Tree from './tree/Tree'
 
 export class SampleDemo extends Component {
   constructor() {
     super()
     this.state = {
-      countriesData: [],
-      selectedNodeKey: null,
-      checkboxValue: [],
-      treeData: [],
       menuItems: [
         {
           label: 'Options',
@@ -52,15 +46,6 @@ export class SampleDemo extends Component {
         }
       ]
     }
-
-    this.carService = new CarService()
-    this.nodeService = new NodeService()
-  }
-
-  componentDidMount() {
-    this.nodeService
-      .getTreeNodes(this)
-      .then(nodes => this.setState({ treeData: nodes }))
   }
 
   render() {
@@ -106,18 +91,7 @@ export class SampleDemo extends Component {
             </div>
 
             <Panel />
-
-            <div className='card card-w-title'>
-              <h1>Tree</h1>
-              <Tree
-                value={this.state.treeData}
-                selectionMode='single'
-                selectionKeys={this.state.selectedNodeKey}
-                onSelectionChange={e =>
-                  this.setState({ selectedNodeKey: e.value })
-                }
-              />
-            </div>
+            <Tree />
 
             <div className='card card-w-title'>
               <h1>Menu</h1>
