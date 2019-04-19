@@ -2,7 +2,7 @@ import React from 'react'
 import { TabView, TabPanel } from 'primereact/tabview'
 
 const Tab = () => (
-  <>
+  <div className='card card-w-title'>
     <h1>TabView</h1>
     <TabView>
       <TabPanel header='Godfather I' leftIcon='pi pi-check'>
@@ -34,7 +34,7 @@ const Tab = () => (
         to Kay, who has since remarried.
       </TabPanel>
     </TabView>
-  </>
+  </div>
 )
 
 export default Tab
