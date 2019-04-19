@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 
 // Customized SampleDemo page components
-import FormElements from './form/FormElements'
-import DataTable from './table/DataTable'
-import DataView from './dataView/DataView'
-import PickList from './pick/Pick'
-import OrderList from './orderList/OrderList'
-import ProgressBar from './progressbar/ProgressBar'
-import PanelMenu from './panelMenu/PanelMenu'
-import AccordionPanel from './accordion/AccordionPanel'
-import TabView from './tab/TabView'
-import Panel from './panel/Panel'
-import Tree from './tree/Tree'
-import Menu from './menu/Menu'
+import FormElements from '../components/sample-demo/FormElements'
+import DataTable from '../components/sample-demo/DataTable'
+import DataView from '../components/sample-demo/DataView'
+import PickList from '../components/sample-demo/Pick'
+import OrderList from '../components/sample-demo/OrderList'
+import ProgressBar from '../components/sample-demo/ProgressBar'
+import PanelMenu from '../components/sample-demo/PanelMenu'
+import AccordionPanel from '../components/sample-demo/AccordionPanel'
+import TabView from '../components/sample-demo/TabView'
+import Panel from '../components/sample-demo/Panel'
+import Tree from '../components/sample-demo/Tree'
+import Menu from '../components/sample-demo/Menu'
 
 export class SampleDemo extends Component {
   render() {
