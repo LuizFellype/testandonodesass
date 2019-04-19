@@ -7,13 +7,13 @@ import { PanelMenu } from 'primereact/panelmenu'
 import { Accordion, AccordionTab } from 'primereact/accordion'
 import { Panel } from 'primereact/panel'
 import { TabView, TabPanel } from 'primereact/tabview'
-import { ProgressBar } from 'primereact/progressbar'
 
 import FormElements from './form/FormElements'
 import DataTable from './table/DataTable'
 import DataView from './dataView/DataView'
 import PickList from './pick/Pick'
 import OrderList from './orderList/OrderList'
+import ProgressBar from './progressbar/ProgressBar'
 
 export class SampleDemo extends Component {
   constructor() {
@@ -214,11 +214,7 @@ export class SampleDemo extends Component {
           <div className='p-col-12 p-lg-6'>
             <PickList />
             <OrderList />
-
-            <div className='card card-w-title'>
-              <h1>ProgressBar</h1>
-              <ProgressBar value={50} />
-            </div>
+            <ProgressBar />
 
             <div className='card card-w-title'>
               <h1>PanelMenu</h1>
