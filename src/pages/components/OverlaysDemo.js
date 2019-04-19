@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-import { CarService } from '../service/CarService'
-import { OverlayPanel } from 'primereact/overlaypanel'
 import { Dialog } from 'primereact/dialog'
 import { Lightbox } from 'primereact/lightbox'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
-import { DataTable } from 'primereact/datatable'
-import { Column } from 'primereact/column'
+
+// Custom components
+import OverlayPanel from '../../components/overlays-demo/OverlayPanel'
 
 export class OverlaysDemo extends Component {
   constructor() {
     super()
     this.state = {
-      dataTableValue: [],
       display: false,
       images: [
         {
@@ -37,14 +35,6 @@ export class OverlaysDemo extends Component {
         }
       ]
     }
-
-    this.carService = new CarService()
-  }
-
-  componentDidMount() {
-    this.carService
-      .getCarsSmall()
-      .then(data => this.setState({ dataTableValue: data.splice(0, 5) }))
   }
 
   render() {
@@ -67,50 +57,7 @@ export class OverlaysDemo extends Component {
     return (
       <div className='p-grid p-fluid'>
         <div className='p-col-12 p-lg-6'>
-          <div className='card'>
-            <h1>Overlay Panel</h1>
-            <div className='p-grid'>
-              <div className='p-col-6'>
-                <Button
-                  label='Image'
-                  onClick={event => this.overlayPanel1.toggle(event)}
-                />
-                <OverlayPanel
-                  ref={el => {
-                    this.overlayPanel1 = el
-                  }}
-                >
-                  <img
-                    src='assets/demo/images/nature/nature1.jpg'
-                    alt='Nature 1'
-                  />
-                </OverlayPanel>
-              </div>
-              <div className='p-col-6'>
-                <Button
-                  label='DataTable'
-                  onClick={event => this.overlayPanel2.toggle(event)}
-                />
-                <OverlayPanel
-                  ref={el => {
-                    this.overlayPanel2 = el
-                  }}
-                  showCloseIcon
-                  dismissable={false}
-                >
-                  <DataTable
-                    value={this.state.dataTableValue}
-                    style={{ width: '500px' }}
-                  >
-                    <Column field='vin' header='Vin' sortable />
-                    <Column field='year' header='Year' sortable />
-                    <Column field='brand' header='Brand' sortable />
-                    <Column field='color' header='Color' sortable />
-                  </DataTable>
-                </OverlayPanel>
-              </div>
-            </div>
-          </div>
+          <OverlayPanel />
           <div className='card'>
             <h1>Dialog</h1>
             <Dialog
