@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { InputText } from 'primereact/inputtext'
 
 // Custom components
 import OverlayPanel from '../../components/overlays-demo/OverlayPanel'
 import Dialog from '../../components/overlays-demo/Dialog'
 import Lightbox from '../../components/overlays-demo/Lightbox'
+import Tooltip from '../../components/overlays-demo/Tooltip'
 
 export class OverlaysDemo extends Component {
   render() {
@@ -17,13 +17,7 @@ export class OverlaysDemo extends Component {
 
         <div className='p-col-12 p-lg-6'>
           <Lightbox />
-          <div className='card'>
-            <h1>Tooltip</h1>
-            <InputText
-              tooltip='Username'
-              tooltipOptions={{ position: 'bottom' }}
-            />
-          </div>
+          <Tooltip />
         </div>
       </div>
     )
