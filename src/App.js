@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+
+// Components
 import { AppTopbar } from './AppTopbar'
 import { AppFooter } from './AppFooter'
 import { AppMenu } from './AppMenu'
@@ -7,7 +9,7 @@ import { AppInlineProfile } from './AppInlineProfile'
 import { Route } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
 import { FormsDemo } from './components/FormsDemo'
-import { SampleDemo } from './components/SampleDemo'
+import SampleDemo from './pages/SampleDemo'
 import { DataDemo } from './components/DataDemo'
 import { PanelsDemo } from './components/PanelsDemo'
 import { OverlaysDemo } from './components/OverlaysDemo'
@@ -19,6 +21,8 @@ import { EmptyPage } from './components/EmptyPage'
 import { Documentation } from './components/Documentation'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import LoginPage from './pages/auth/Login'
+
+// CSS
 import 'primereact/resources/themes/nova-light/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
