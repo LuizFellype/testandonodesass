@@ -33,3 +33,5 @@ export class NodeService {
       .then(res => res.data.root)
   }
 }
+
+export default new NodeService()
