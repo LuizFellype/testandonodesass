@@ -3,7 +3,6 @@ import { CarService } from '../service/CarService'
 import { NodeService } from '../service/NodeService'
 import { Tree } from 'primereact/tree'
 import { Menu } from 'primereact/menu'
-import { Panel } from 'primereact/panel'
 
 import FormElements from './form/FormElements'
 import DataTable from './table/DataTable'
@@ -14,6 +13,7 @@ import ProgressBar from './progressbar/ProgressBar'
 import PanelMenu from './menu/PanelMenu'
 import AccordionPanel from './accordion/AccordionPanel'
 import TabView from './tab/TabView'
+import Panel from './panel/Panel'
 
 export class SampleDemo extends Component {
   constructor() {
@@ -105,19 +105,7 @@ export class SampleDemo extends Component {
               <TabView />
             </div>
 
-            <div className='card card-w-title'>
-              <h1>Panel</h1>
-              <Panel header='Godfather I' toggleable>
-                The story begins as Don Vito Corleone, the head of a New York
-                Mafia family, oversees his daughter-s wedding. His beloved son
-                Michael has just come home from the war, but does not intend to
-                become part of his father-s business. Through Michael-s life the
-                nature of the family business becomes clear. The business of the
-                family is just like the head of the family, kind and benevolent
-                to those who give respect, but given to ruthless violence
-                whenever anything stands against the good of the family.
-              </Panel>
-            </div>
+            <Panel />
 
             <div className='card card-w-title'>
               <h1>Tree</h1>
