@@ -1,53 +1,20 @@
 import React, { Component } from 'react'
-import { Menu } from 'primereact/menu'
 
+// Customized SampleDemo page components
 import FormElements from './form/FormElements'
 import DataTable from './table/DataTable'
 import DataView from './dataView/DataView'
 import PickList from './pick/Pick'
 import OrderList from './orderList/OrderList'
 import ProgressBar from './progressbar/ProgressBar'
-import PanelMenu from './menu/PanelMenu'
+import PanelMenu from './panelMenu/PanelMenu'
 import AccordionPanel from './accordion/AccordionPanel'
 import TabView from './tab/TabView'
 import Panel from './panel/Panel'
 import Tree from './tree/Tree'
+import Menu from './menu/Menu'
 
 export class SampleDemo extends Component {
-  constructor() {
-    super()
-    this.state = {
-      menuItems: [
-        {
-          label: 'Options',
-          items: [
-            {
-              label: 'New',
-              icon: 'pi pi-fw pi-plus',
-              command: () => (window.location.hash = '/fileupload')
-            },
-            {
-              label: 'Delete',
-              icon: 'pi pi-fw pi-trash',
-              url: 'http://primetek.com.tr'
-            }
-          ]
-        },
-        {
-          label: 'Account',
-          items: [
-            {
-              label: 'Options',
-              icon: 'pi pi-fw pi-cog',
-              command: () => (window.location.hash = '/')
-            },
-            { label: 'Sign Out', icon: 'pi pi-fw pi-power-off' }
-          ]
-        }
-      ]
-    }
-  }
-
   render() {
     return (
       <div className='p-fluid'>
@@ -92,11 +59,7 @@ export class SampleDemo extends Component {
 
             <Panel />
             <Tree />
-
-            <div className='card card-w-title'>
-              <h1>Menu</h1>
-              <Menu model={this.state.menuItems} />
-            </div>
+            <Menu />
           </div>
         </div>
       </div>
