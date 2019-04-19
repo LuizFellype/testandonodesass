@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { Dialog } from 'primereact/dialog'
 import { Lightbox } from 'primereact/lightbox'
-import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 
 // Custom components
 import OverlayPanel from '../../components/overlays-demo/OverlayPanel'
+import Dialog from '../../components/overlays-demo/Dialog'
 
 export class OverlaysDemo extends Component {
   constructor() {
     super()
     this.state = {
-      display: false,
       images: [
         {
           source: 'assets/demo/images/sopranos/sopranos1.jpg',
@@ -38,53 +36,11 @@ export class OverlaysDemo extends Component {
   }
 
   render() {
-    const dialogFooter = (
-      <div>
-        <Button
-          icon='pi pi-check'
-          onClick={() => this.setState({ display: false })}
-          label='Yes'
-        />
-        <Button
-          icon='pi pi-times'
-          onClick={() => this.setState({ display: false })}
-          label='No'
-          className='p-button-secondary'
-        />
-      </div>
-    )
-
     return (
       <div className='p-grid p-fluid'>
         <div className='p-col-12 p-lg-6'>
           <OverlayPanel />
-          <div className='card'>
-            <h1>Dialog</h1>
-            <Dialog
-              header='Godfather I'
-              visible={this.state.display}
-              modal
-              width='400px'
-              footer={dialogFooter}
-              onHide={() => this.setState({ display: false })}
-            >
-              <p>
-                The story begins as Don Vito Corleone, the head of a New York
-                Mafia family, oversees his daughter-s wedding. His beloved son
-                Michael has just come home from the war, but does not intend to
-                become part of his father-s business. Through Michael-s life the
-                nature of the family business becomes clear. The business of the
-                family is just like the head of the family, kind and benevolent
-                to those who give respect, but given to ruthless violence
-                whenever anything stands against the good of the family.
-              </p>
-            </Dialog>
-            <Button
-              icon='pi pi-external-link'
-              label='Show'
-              onClick={() => this.setState({ display: true })}
-            />
-          </div>
+          <Dialog />
         </div>
         <div className='p-col-12 p-lg-6'>
           <div className='card'>
