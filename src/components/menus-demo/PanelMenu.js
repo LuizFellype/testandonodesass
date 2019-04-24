@@ -5,7 +5,7 @@ import { panelMenuItems } from '../../constants'
 import { PanelMenu } from 'primereact/panelmenu'
 
 const Menu = () => (
-  <div className='card card-w-title'>
+  <div className='card'>
     <h1>PanelMenu</h1>
     <PanelMenu model={panelMenuItems} />
   </div>
