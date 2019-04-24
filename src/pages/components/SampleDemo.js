@@ -7,9 +7,7 @@ import DataTable from '../../components/sample-demo/DataTable'
 import DataView from '../../components/sample-demo/DataView'
 import PickList from '../../components/sample-demo/Pick'
 import OrderList from '../../components/sample-demo/OrderList'
-import PanelMenu from '../../components/sample-demo/PanelMenu'
 import Tree from '../../components/sample-demo/Tree'
-import Menu from '../../components/sample-demo/Menu'
 
 const SampleDemo = () => (
   <div className='p-fluid'>
@@ -25,12 +23,10 @@ const SampleDemo = () => (
       <div className='p-col-12 p-lg-6'>
         <PickList />
         <OrderList />
-        <PanelMenu />
       </div>
 
       <div className='p-col-12 p-lg-6'>
         <Tree />
-        <Menu />
       </div>
     </div>
   </div>
