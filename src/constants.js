@@ -526,3 +526,23 @@ export const tabMenuItems = [
   { label: 'Documentation', icon: 'pi pi-fw pi-file' },
   { label: 'Settings', icon: 'pi pi-fw pi-cog' }
 ]
+
+export const brands = [
+  'Audi',
+  'BMW',
+  'Fiat',
+  'Ford',
+  'Honda',
+  'Jaguar',
+  'Mercedes',
+  'Renault',
+  'Volvo'
+]
+
+export const listBoxCities = [
+  { label: 'Madrid', value: 'Madrid' },
+  { label: 'Geneva', value: 'Geneva' },
+  { label: 'Los Angeles', value: 'Los Angeles' },
+  { label: 'Monaco', value: 'Monaco' },
+  { label: 'Berlin', value: 'Berlin' }
+]
