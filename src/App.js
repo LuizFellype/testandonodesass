@@ -1,26 +1,31 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
+// Auth
+import LoginPage from './pages/auth/Login'
+
 // Components
+import FormsDemo from './pages/components/FormsDemo'
+import SampleDemo from './pages/components/SampleDemo'
+import PanelsDemo from './pages/components/PanelsDemo'
+import OverlaysDemo from './pages/components/OverlaysDemo'
+import MenusDemo from './pages/components/MenusDemo'
+import MessagesDemo from './pages/components/MessagesDemo'
+import MiscDemo from './pages/components/MiscDemo'
+
+// Template Pages
+import EmptyPage from './pages/template-pages/EmptyPage'
+
 import { AppTopbar } from './AppTopbar'
 import { AppFooter } from './AppFooter'
 import { AppMenu } from './AppMenu'
 import { AppInlineProfile } from './AppInlineProfile'
 import { Route } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
-import FormsDemo from './pages/components/FormsDemo'
-import SampleDemo from './pages/components/SampleDemo'
 import { DataDemo } from './components/DataDemo'
-import PanelsDemo from './pages/components/PanelsDemo'
-import OverlaysDemo from './pages/components/OverlaysDemo'
-import MenusDemo from './pages/components/MenusDemo'
-import MessagesDemo from './pages/components/MessagesDemo'
 import { ChartsDemo } from './components/ChartsDemo'
-import MiscDemo from './pages/components/MiscDemo'
-import { EmptyPage } from './components/EmptyPage'
 import { Documentation } from './components/Documentation'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
-import LoginPage from './pages/auth/Login'
 
 // CSS
 import 'primereact/resources/themes/nova-light/theme.css'
