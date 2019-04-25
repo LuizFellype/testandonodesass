@@ -16,6 +16,9 @@ import MiscDemo from './pages/components/MiscDemo'
 // Template Pages
 import EmptyPage from './pages/template-pages/EmptyPage'
 
+// Documentation
+import Documentation from './pages/documentation/Documentation'
+
 import { AppTopbar } from './AppTopbar'
 import { AppFooter } from './AppFooter'
 import { AppMenu } from './AppMenu'
@@ -24,7 +27,6 @@ import { Route } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
 import { DataDemo } from './components/DataDemo'
 import { ChartsDemo } from './components/ChartsDemo'
-import { Documentation } from './components/Documentation'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 
 // CSS
