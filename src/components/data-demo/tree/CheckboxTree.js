@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react'
 
 // Services
-import NodeService from '../../service/NodeService'
+import NodeService from '../../../service/NodeService'
 
 // Prime Tree component
 import { Tree } from 'primereact/tree'
 
 const CustomTree = () => {
   const [treeData, setTreeData] = useState([])
-  const [selectedNodeKey, setSelectedNodeKey] = useState(null)
+  const [selectedFiles, setSelectedFiles] = useState(null)
 
   useEffect(() => {
     NodeService.getTreeNodes().then(nodes => setTreeData(nodes))
   }, [])
 
   return (
-    <div className='card card-w-title'>
-      <h1>Tree</h1>
+    <div className='p-col-12 p-md-6'>
+      <h1>Checkbox Tree</h1>
       <Tree
         value={treeData}
-        selectionMode='single'
-        selectionKeys={selectedNodeKey}
-        onSelectionChange={({ value }) => setSelectedNodeKey(value)}
+        selectionMode='checkbox'
+        selectionKeys={selectedFiles}
+        onSelectionChange={({ value }) => setSelectedFiles(value)}
       />
     </div>
   )
