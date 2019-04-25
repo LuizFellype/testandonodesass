@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import CarService from '../../service/CarService'
 
-// Prime DataTable imports
+// Prime DataTable component
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 
-const Table = () => {
+const PrimeTable = () => {
   const [dataTableValue, setDataTableValue] = useState([])
   const [dataTableSelection, setDataTableSelection] = useState(null)
 
   useEffect(() => {
-    CarService.getCarsSmall().then(data => setDataTableValue(data))
+    CarService.getCarsMedium().then(data => setDataTableValue(data))
   }, [])
 
   return (
@@ -18,8 +18,12 @@ const Table = () => {
       <h1>DataTable</h1>
       <DataTable
         value={dataTableValue}
+        paginatorPosition='both'
         selectionMode='single'
-        header='DataTable'
+        header='List of Cars'
+        paginator
+        rows={10}
+        responsive
         selection={dataTableSelection}
         onSelectionChange={({ value }) => setDataTableSelection(value)}
       >
@@ -32,4 +36,4 @@ const Table = () => {
   )
 }
 
-export default Table
+export default PrimeTable
