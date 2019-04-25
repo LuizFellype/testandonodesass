@@ -7,3 +7,5 @@ export class EventService {
       .then(res => res.data.data)
   }
 }
+
+export default new EventService()
