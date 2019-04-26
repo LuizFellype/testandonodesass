@@ -77,7 +77,7 @@ const Documentation = () => (
 
     return (
         <div className={wrapperClass} onClick={this.onWrapperClick}>
-            <AppTopbar onToggleMenu={this.onToggleMenu}/>
+            <Topbar onToggleMenu={this.onToggleMenu}/>
 
             <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
 
