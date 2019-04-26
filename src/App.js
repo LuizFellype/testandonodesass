@@ -12,6 +12,7 @@ import Menu from './containers/Menu/Menu'
 import Dashboard from './pages/Dashboard'
 
 // Components
+import Profile from './components/Profile/Profile'
 import FormsDemo from './pages/components/FormsDemo'
 import SampleDemo from './pages/components/SampleDemo'
 import PanelsDemo from './pages/components/PanelsDemo'
@@ -29,7 +30,6 @@ import EmptyPage from './pages/template-pages/EmptyPage'
 import Documentation from './pages/documentation/Documentation'
 
 import { AppFooter } from './AppFooter'
-import { AppInlineProfile } from './AppInlineProfile'
 import { Route } from 'react-router-dom'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 
@@ -305,7 +305,7 @@ class App extends Component {
               <div className='layout-logo'>
                 <img alt='Logo' src={logo} />
               </div>
-              <AppInlineProfile />
+              <Profile />
               <Menu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
             </div>
           </ScrollPanel>
