@@ -8,7 +8,6 @@ import OrderList from '../../components/data-demo/OrderList'
 import PrimeTree from '../../components/data-demo/tree/Tree'
 import FlowChart from '../../components/data-demo/FlowChart'
 import TreeDataTable from '../../components/data-demo/TreeDataTable'
-import Calendar from '../../components/data-demo/Calendar'
 
 const DataDemo = () => (
   <div className='p-grid'>
@@ -38,10 +37,6 @@ const DataDemo = () => (
 
     <div className='p-col-12'>
       <TreeDataTable />
-    </div>
-
-    <div className='p-col-12'>
-      <Calendar />
     </div>
   </div>
 )

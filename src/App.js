@@ -4,6 +4,9 @@ import classNames from 'classnames'
 // Auth
 import LoginPage from './pages/auth/Login'
 
+// Home
+import Dashboard from './pages/Dashboard'
+
 // Components
 import FormsDemo from './pages/components/FormsDemo'
 import SampleDemo from './pages/components/SampleDemo'
@@ -25,7 +28,6 @@ import { AppFooter } from './AppFooter'
 import { AppMenu } from './AppMenu'
 import { AppInlineProfile } from './AppInlineProfile'
 import { Route } from 'react-router-dom'
-import { Dashboard } from './components/Dashboard'
 import { ChartsDemo } from './components/ChartsDemo'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 

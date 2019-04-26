@@ -579,3 +579,31 @@ export const organizationChartValue = [
     ]
   }
 ]
+
+export const lineData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'First Dataset',
+      data: [65, 59, 80, 81, 56, 55, 40],
+      fill: false,
+      borderColor: '#007be5'
+    },
+    {
+      label: 'Second Dataset',
+      data: [28, 48, 40, 19, 86, 27, 90],
+      fill: false,
+      borderColor: '#20d077'
+    }
+  ]
+}
+
+export const fullCalendarOptions = {
+  defaultDate: '2016-01-12',
+  header: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'month,agendaWeek,agendaDay'
+  },
+  editable: true
+}
