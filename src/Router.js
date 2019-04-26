@@ -2,24 +2,24 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 // Home
-import Dashboard from './pages/Dashboard'
+import Dashboard from './template/pages/Dashboard'
 
 // Components
-import FormsDemo from './pages/components/FormsDemo'
-import SampleDemo from './pages/components/SampleDemo'
-import PanelsDemo from './pages/components/PanelsDemo'
-import OverlaysDemo from './pages/components/OverlaysDemo'
-import MenusDemo from './pages/components/MenusDemo'
-import MessagesDemo from './pages/components/MessagesDemo'
-import MiscDemo from './pages/components/MiscDemo'
-import DataDemo from './pages/components/DataDemo'
-import ChartsDemo from './pages/components/ChartsDemo'
+import FormsDemo from './template/pages/components/FormsDemo'
+import SampleDemo from './template/pages/components/SampleDemo'
+import PanelsDemo from './template/pages/components/PanelsDemo'
+import OverlaysDemo from './template/pages/components/OverlaysDemo'
+import MenusDemo from './template/pages/components/MenusDemo'
+import MessagesDemo from './template/pages/components/MessagesDemo'
+import MiscDemo from './template/pages/components/MiscDemo'
+import DataDemo from './template/pages/components/DataDemo'
+import ChartsDemo from './template/pages/components/ChartsDemo'
 
 // Template Pages
-import EmptyPage from './pages/template-pages/EmptyPage'
+import EmptyPage from './template/pages/template-pages/EmptyPage'
 
 // Documentation
-import Documentation from './pages/documentation/Documentation'
+import Documentation from './template/pages/documentation/Documentation'
 
 function Router() {
   return (

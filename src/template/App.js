@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Router from './Router'
+import Router from '../Router'
 import { Route, withRouter } from 'react-router-dom'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import classNames from 'classnames'
@@ -21,7 +21,7 @@ import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 import 'fullcalendar/dist/fullcalendar.css'
-import './layout/layout.css'
+import '../layout/layout.css'
 
 const App = ({ history, location }) => {
   const [layoutMode, setLayoutMode] = useState('static')
