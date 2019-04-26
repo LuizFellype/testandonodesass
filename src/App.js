@@ -16,6 +16,7 @@ import MenusDemo from './pages/components/MenusDemo'
 import MessagesDemo from './pages/components/MessagesDemo'
 import MiscDemo from './pages/components/MiscDemo'
 import DataDemo from './pages/components/DataDemo'
+import ChartsDemo from './pages/components/ChartsDemo'
 
 // Template Pages
 import EmptyPage from './pages/template-pages/EmptyPage'
@@ -28,7 +29,6 @@ import { AppFooter } from './AppFooter'
 import { AppMenu } from './AppMenu'
 import { AppInlineProfile } from './AppInlineProfile'
 import { Route } from 'react-router-dom'
-import { ChartsDemo } from './components/ChartsDemo'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 
 // CSS
