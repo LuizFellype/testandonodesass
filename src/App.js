@@ -4,6 +4,9 @@ import classNames from 'classnames'
 // Auth
 import LoginPage from './pages/auth/Login'
 
+// Layout
+import Topbar from './containers/TopBar/Topbar'
+
 // Home
 import Dashboard from './pages/Dashboard'
 
@@ -24,7 +27,6 @@ import EmptyPage from './pages/template-pages/EmptyPage'
 // Documentation
 import Documentation from './pages/documentation/Documentation'
 
-import { AppTopbar } from './AppTopbar'
 import { AppFooter } from './AppFooter'
 import { AppMenu } from './AppMenu'
 import { AppInlineProfile } from './AppInlineProfile'
@@ -289,7 +291,7 @@ class App extends Component {
 
     return (
       <div className={wrapperClass} onClick={this.onWrapperClick}>
-        <AppTopbar onToggleMenu={this.onToggleMenu} />
+        <Topbar onToggleMenu={this.onToggleMenu} />
         <div
           ref={el => (this.sidebar = el)}
           className={sidebarClassName}
