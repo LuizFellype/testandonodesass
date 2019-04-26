@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import classNames from 'classnames'
 
 // Auth
@@ -7,6 +9,7 @@ import LoginPage from './pages/auth/Login'
 // Layout
 import Topbar from './containers/TopBar/Topbar'
 import Menu from './containers/Menu/Menu'
+import Footer from './containers/Footer'
 
 // Home
 import Dashboard from './pages/Dashboard'
@@ -28,10 +31,6 @@ import EmptyPage from './pages/template-pages/EmptyPage'
 
 // Documentation
 import Documentation from './pages/documentation/Documentation'
-
-import { AppFooter } from './AppFooter'
-import { Route } from 'react-router-dom'
-import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 
 // CSS
 import 'primereact/resources/themes/nova-light/theme.css'
@@ -325,7 +324,7 @@ class App extends Component {
           <Route path='/empty' component={EmptyPage} />
           <Route path='/documentation' component={Documentation} />
         </div>
-        <AppFooter />
+        <Footer />
         <div className='layout-mask' />
       </div>
     )
