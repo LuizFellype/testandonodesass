@@ -1,5 +1,5 @@
 import React from 'react'
-import { items } from '../../constants'
+import { items } from '../../utils/constants/menusDemo'
 
 // Prime SlideMenu component
 import { SlideMenu } from 'primereact/slidemenu'

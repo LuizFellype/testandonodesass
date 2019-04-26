@@ -1,9 +1,10 @@
 import React from 'react'
+import { megaMenuItems } from '../../../utils/constants/menusDemo'
 
 // Prime MegaMenu component
 import { MegaMenu } from 'primereact/megamenu'
 
-const VerticalMegaMenu = ({ megaMenuItems }) => (
+const VerticalMegaMenu = () => (
   <>
     <h1>MegaMenu - Vertical</h1>
     <MegaMenu

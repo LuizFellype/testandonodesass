@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { cities } from '../../constants'
+import { cities } from '../../utils/constants/formsDemo'
 
 // Prime Dropdown component
 import { Dropdown } from 'primereact/dropdown'

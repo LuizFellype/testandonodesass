@@ -1,5 +1,5 @@
 import React from 'react'
-import { organizationChartValue } from '../../constants'
+import { organizationChartValue } from '../../utils/constants/dataDemo'
 
 // Prime OrganizationChart component
 import { OrganizationChart } from 'primereact/organizationchart'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { tieredItems } from '../../constants'
+import { tieredItems } from '../../utils/constants/menusDemo'
 
 // Prime Menubar component
 import { Menubar } from 'primereact/menubar'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { breadcrumbItems, home } from '../../constants'
+import { breadcrumbItems, home } from '../../utils/constants/menusDemo'
 
 // Prime BreadCrumb component
 import { BreadCrumb } from 'primereact/breadcrumb'
