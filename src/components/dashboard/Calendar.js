@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import EventService from '../../service/EventService'
-import { fullCalendarOptions } from '../../constants'
+import { fullCalendarOptions } from '../../utils/constants/constants'
 
 // Prime FullCalendar component
 import { FullCalendar } from 'primereact/fullcalendar'
