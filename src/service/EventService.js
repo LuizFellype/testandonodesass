@@ -1,11 +1,6 @@
 import axios from 'axios'
 
-export class EventService {
-  getEvents() {
-    return axios
-      .get('assets/demo/data/scheduleevents.json')
-      .then(res => res.data.data)
-  }
-}
+const getEvents = () =>
+  axios.get('assets/demo/data/scheduleevents.json').then(res => res.data.data)
 
-export default new EventService()
+export default { getEvents }

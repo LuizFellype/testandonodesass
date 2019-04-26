@@ -11,7 +11,7 @@ const Simple = () => {
   const [country, setCountry] = useState('')
 
   useEffect(() => {
-    CountryService.getCountries(setCountriesData)
+    CountryService.getCountries().then(data => setCountriesData(data))
   }, [])
 
   const filterCountry = ({ query }) => {

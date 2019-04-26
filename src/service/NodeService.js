@@ -1,37 +1,9 @@
 import axios from 'axios'
 
-export class NodeService {
-  getFiles(_this) {
-    return axios
-      .get('assets/demo/data/files.json')
-      .then(res => res.data.data)
-      .then(data => {
-        _this.setState({ files: data })
-        return data
-      })
-  }
+const getTreeNodes = () =>
+  axios.get('assets/demo/data/treenodes.json').then(res => res.data.root)
 
-  getFilesystem(_this) {
-    return axios
-      .get('assets/demo/data/filesystem.json')
-      .then(res => res.data.data)
-      .then(data => {
-        _this.setState({ files: data })
-        return data
-      })
-  }
+const getTreeTableNodes = () =>
+  axios.get('assets/demo/data/treetablenodes.json').then(res => res.data.root)
 
-  getTreeNodes() {
-    return axios
-      .get('assets/demo/data/treenodes.json')
-      .then(res => res.data.root)
-  }
-
-  getTreeTableNodes() {
-    return axios
-      .get('assets/demo/data/treetablenodes.json')
-      .then(res => res.data.root)
-  }
-}
-
-export default new NodeService()
+export default { getTreeNodes, getTreeTableNodes }
