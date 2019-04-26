@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import EventService from '../../service/EventService'
+import { fullCalendarOptions } from '../../constants'
 
 // Prime FullCalendar component
 import { FullCalendar } from 'primereact/fullcalendar'
@@ -11,20 +12,15 @@ const Calendar = () => {
     EventService.getEvents().then(events => setFullCalendarEvents(events))
   }, [])
 
-  const fullcalendarOptions = {
-    defaultDate: '2016-01-12',
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay'
-    },
-    editable: true
-  }
-
   return (
-    <div className='card card-w-title'>
-      <h1>Schedule</h1>
-      <FullCalendar events={fullCalendarEvents} options={fullcalendarOptions} />
+    <div className='p-col-12 p-lg-8'>
+      <div className='card card-w-title'>
+        <h1>Schedule</h1>
+        <FullCalendar
+          events={fullCalendarEvents}
+          options={fullCalendarOptions}
+        />
+      </div>
     </div>
   )
 }
