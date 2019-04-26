@@ -7,6 +7,7 @@ import AutoComplete from '../../components/forms-demo/AutoComplete/AutoComplete'
 import MultiSelect from '../../components/forms-demo/MultiSelect'
 import Calendar from '../../components/forms-demo/Calendar/Calendar'
 import Chips from '../../components/forms-demo/Chips'
+import ContactUs from '../../components/forms-demo/ContactUs'
 import Checkboxes from '../../components/forms-demo/Checkboxes'
 import RadioButtons from '../../components/forms-demo/RadioButtons'
 import Switch from '../../components/forms-demo/Switch'
@@ -31,6 +32,7 @@ const FormsDemo = () => (
       <MultiSelect />
       <Calendar />
       <Chips />
+      <ContactUs />
     </div>
 
     <div className='p-col-12 p-lg-6'>
