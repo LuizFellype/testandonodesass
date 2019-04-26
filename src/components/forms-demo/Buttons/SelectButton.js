@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { types } from '../../../constants'
+import { types } from '../../../utils/constants/formsDemo'
 
 // Prime components
 import { SelectButton } from 'primereact/selectbutton'

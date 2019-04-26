@@ -1,5 +1,5 @@
 import React from 'react'
-import { panelMenuItems } from '../../constants'
+import { panelMenuItems } from '../../utils/constants/menusDemo'
 
 // Prime PanelMenu component
 import { PanelMenu } from 'primereact/panelmenu'

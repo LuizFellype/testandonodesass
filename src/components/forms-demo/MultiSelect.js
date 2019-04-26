@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { carOptions } from '../../constants'
+import { carOptions } from '../../utils/constants/formsDemo'
 
 // Prime MultiSelect component
 import { MultiSelect } from 'primereact/multiselect'

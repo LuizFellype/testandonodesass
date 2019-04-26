@@ -1,5 +1,5 @@
 import React from 'react'
-import { stepsItems } from '../../constants'
+import { stepsItems } from '../../utils/constants/menusDemo'
 
 // Prime Steps component
 import { Steps } from 'primereact/steps'

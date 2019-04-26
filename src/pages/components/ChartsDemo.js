@@ -5,7 +5,7 @@ import {
   pieData,
   polarData,
   radarData
-} from '../../constants'
+} from '../../utils/constants/chartsDemo'
 
 // Prime Chart component
 import { Chart } from 'primereact/chart'

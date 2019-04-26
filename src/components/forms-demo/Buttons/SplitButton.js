@@ -1,5 +1,5 @@
 import React from 'react'
-import { splitButtonItems } from '../../../constants'
+import { splitButtonItems } from '../../../utils/constants/formsDemo'
 
 // Prime components
 import { SplitButton } from 'primereact/splitbutton'

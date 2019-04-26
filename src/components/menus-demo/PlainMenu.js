@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { items } from '../../constants'
+import { items } from '../../utils/constants/menusDemo'
 
 // Prime components
 import { Menu } from 'primereact/menu'

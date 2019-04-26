@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { brands } from '../../../constants'
+import { brands } from '../../../utils/constants/formsDemo'
 import Label from './Label'
 
 // Prime AutoComplete component

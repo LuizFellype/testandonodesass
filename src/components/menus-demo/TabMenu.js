@@ -1,5 +1,5 @@
 import React from 'react'
-import { tabMenuItems } from '../../constants'
+import { tabMenuItems } from '../../utils/constants/menusDemo'
 
 // Prime TabManu component
 import { TabMenu } from 'primereact/tabmenu'

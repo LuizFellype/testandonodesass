@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { listBoxCities } from '../../constants'
+import { listBoxCities } from '../../utils/constants/formsDemo'
 
 // Prime ListBox component
 import { ListBox } from 'primereact/listbox'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { images } from '../../constants'
+import { images } from '../../utils/constants/overlaysDemo'
 
 // Prime Lightbox component
 import { Lightbox } from 'primereact/lightbox'
