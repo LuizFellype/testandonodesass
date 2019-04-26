@@ -24,18 +24,18 @@ import Documentation from './pages/documentation/Documentation'
 function Router() {
   return (
     <Switch>
-      <Route path='/' exact component={Dashboard} />
-      <Route path='/forms' component={FormsDemo} />
-      <Route path='/sample' component={SampleDemo} />
-      <Route path='/data' component={DataDemo} />
-      <Route path='/panels' component={PanelsDemo} />
-      <Route path='/overlays' component={OverlaysDemo} />
-      <Route path='/menus' component={MenusDemo} />
-      <Route path='/messages' component={MessagesDemo} />
-      <Route path='/charts' component={ChartsDemo} />
-      <Route path='/misc' component={MiscDemo} />
-      <Route path='/empty' component={EmptyPage} />
-      <Route path='/documentation' component={Documentation} />
+      <Route exact path='/' component={EmptyPage} />
+      <Route exact path='/theme' component={Dashboard} />
+      <Route path='/theme/forms' component={FormsDemo} />
+      <Route path='/theme/sample' component={SampleDemo} />
+      <Route path='/theme/data' component={DataDemo} />
+      <Route path='/theme/panels' component={PanelsDemo} />
+      <Route path='/theme/overlays' component={OverlaysDemo} />
+      <Route path='/theme/menus' component={MenusDemo} />
+      <Route path='/theme/messages' component={MessagesDemo} />
+      <Route path='/theme/charts' component={ChartsDemo} />
+      <Route path='/theme/misc' component={MiscDemo} />
+      <Route path='/theme/documentation' component={Documentation} />
     </Switch>
   )
 }
