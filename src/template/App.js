@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Router from './Router'
-import { Route } from 'react-router-dom'
+import Router from '../Router'
+import { Route, withRouter } from 'react-router-dom'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import classNames from 'classnames'
 
@@ -21,9 +21,9 @@ import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 import 'fullcalendar/dist/fullcalendar.css'
-import './layout/layout.css'
+import '../layout/layout.css'
 
-const App = () => {
+const App = ({ history, location }) => {
   const [layoutMode, setLayoutMode] = useState('static')
   const [layoutColorMode, setLayoutColorMode] = useState('dark')
   const [staticMenuInactive, setStaticMenuInactive] = useState(false)
@@ -60,9 +60,7 @@ const App = () => {
     {
       label: 'Dashboard',
       icon: 'pi pi-fw pi-home',
-      command: () => {
-        window.location = '#/'
-      }
+      command: () => history.push('/theme')
     },
     {
       label: 'Menu Modes',
@@ -101,23 +99,37 @@ const App = () => {
       icon: 'pi pi-fw pi-globe',
       badge: '9',
       items: [
-        { label: 'Sample Page', icon: 'pi pi-fw pi-th-large', to: '/sample' },
-        { label: 'Forms', icon: 'pi pi-fw pi-file', to: '/forms' },
-        { label: 'Data', icon: 'pi pi-fw pi-table', to: '/data' },
-        { label: 'Panels', icon: 'pi pi-fw pi-list', to: '/panels' },
-        { label: 'Overlays', icon: 'pi pi-fw pi-clone', to: '/overlays' },
-        { label: 'Menus', icon: 'pi pi-fw pi-plus', to: '/menus' },
-        { label: 'Messages', icon: 'pi pi-fw pi-spinner', to: '/messages' },
-        { label: 'Charts', icon: 'pi pi-fw pi-chart-bar', to: '/charts' },
-        { label: 'Misc', icon: 'pi pi-fw pi-upload', to: '/misc' }
+        {
+          label: 'Sample Page',
+          icon: 'pi pi-fw pi-th-large',
+          to: '/theme/sample'
+        },
+        { label: 'Forms', icon: 'pi pi-fw pi-file', to: '/theme/forms' },
+        { label: 'Data', icon: 'pi pi-fw pi-table', to: '/theme/data' },
+        { label: 'Panels', icon: 'pi pi-fw pi-list', to: '/theme/panels' },
+        {
+          label: 'Overlays',
+          icon: 'pi pi-fw pi-clone',
+          to: '/theme/overlays'
+        },
+        { label: 'Menus', icon: 'pi pi-fw pi-plus', to: '/theme/menus' },
+        {
+          label: 'Messages',
+          icon: 'pi pi-fw pi-spinner',
+          to: '/theme/messages'
+        },
+        {
+          label: 'Charts',
+          icon: 'pi pi-fw pi-chart-bar',
+          to: '/theme/charts'
+        },
+        { label: 'Misc', icon: 'pi pi-fw pi-upload', to: '/theme/misc' }
       ]
     },
     {
       label: 'Template Pages',
       icon: 'pi pi-fw pi-file',
-      items: [
-        { label: 'Empty Page', icon: 'pi pi-fw pi-circle-off', to: '/empty' }
-      ]
+      items: [{ label: 'Empty Page', icon: 'pi pi-fw pi-circle-off', to: '/' }]
     },
     {
       label: 'Menu Hierarchy',
@@ -174,9 +186,7 @@ const App = () => {
     {
       label: 'Documentation',
       icon: 'pi pi-fw pi-question',
-      command: () => {
-        window.location = '#/documentation'
-      }
+      command: () => history.push('/theme/documentation')
     },
     {
       label: 'View Source',
@@ -273,7 +283,7 @@ const App = () => {
 
   return (
     <>
-      {window.location.hash === '#/login' ? (
+      {location.pathname === '/login' ? (
         <Route path='/login' component={LoginPage} />
       ) : (
         renderApp()
@@ -282,4 +292,4 @@ const App = () => {
   )
 }
 
-export default App
+export default withRouter(App)
