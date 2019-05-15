@@ -1,11 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Router from '../Router'
-import { Route, withRouter } from 'react-router-dom'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import classNames from 'classnames'
-
-// Auth
-import LoginPage from './pages/auth/Login'
 
 // Layout
 import Topbar from './containers/TopBar/Topbar'
@@ -23,7 +18,9 @@ import 'primeflex/primeflex.css'
 import 'fullcalendar/dist/fullcalendar.css'
 import '../layout/layout.css'
 
-const App = ({ history, location }) => {
+const defaultThemeMenu = []
+
+const App = React.memo(({ history, children, isDevelopMode }) => {
   const [layoutMode, setLayoutMode] = useState('static')
   const [layoutColorMode, setLayoutColorMode] = useState('dark')
   const [staticMenuInactive, setStaticMenuInactive] = useState(false)
@@ -56,146 +53,217 @@ const App = ({ history, location }) => {
     } else removeClass(document.body, 'body-overflow-hidden')
   })
 
-  const menu = [
+  console.log('process.env', process.env.NODE_ENV)
+
+  const themeMenu = isDevelopMode()
+    ? [
+      {
+        label: 'Dashboard',
+        icon: 'pi pi-fw pi-eye',
+        items: [
+          {
+            label: 'Menu Modes',
+            icon: 'pi pi-fw pi-cog',
+            items: [
+              {
+                label: 'Static Menu',
+                icon: 'pi pi-fw pi-bars',
+                command: () => setLayoutMode('static')
+              },
+              {
+                label: 'Overlay Menu',
+                icon: 'pi pi-fw pi-bars',
+                command: () => setLayoutMode('overlay')
+              }
+            ]
+          },
+          {
+            label: 'Menu Colors',
+            icon: 'pi pi-fw pi-align-left',
+            items: [
+              {
+                label: 'Dark',
+                icon: 'pi pi-fw pi-bars',
+                command: () => setLayoutColorMode('dark')
+              },
+              {
+                label: 'Light',
+                icon: 'pi pi-fw pi-bars',
+                command: () => setLayoutColorMode('light')
+              }
+            ]
+          },
+          {
+            label: 'Components',
+            icon: 'pi pi-fw pi-globe',
+            badge: '9',
+            items: [
+              {
+                label: 'Sample Page',
+                icon: 'pi pi-fw pi-th-large',
+                to: '/theme/sample'
+              },
+              {
+                label: 'Forms',
+                icon: 'pi pi-fw pi-file',
+                to: '/theme/forms'
+              },
+              {
+                label: 'Data',
+                icon: 'pi pi-fw pi-table',
+                to: '/theme/data'
+              },
+              {
+                label: 'Panels',
+                icon: 'pi pi-fw pi-list',
+                to: '/theme/panels'
+              },
+              {
+                label: 'Overlays',
+                icon: 'pi pi-fw pi-clone',
+                to: '/theme/overlays'
+              },
+              {
+                label: 'Menus',
+                icon: 'pi pi-fw pi-plus',
+                to: '/theme/menus'
+              },
+              {
+                label: 'Messages',
+                icon: 'pi pi-fw pi-spinner',
+                to: '/theme/messages'
+              },
+              {
+                label: 'Charts',
+                icon: 'pi pi-fw pi-chart-bar',
+                to: '/theme/charts'
+              },
+              {
+                label: 'Misc',
+                icon: 'pi pi-fw pi-upload',
+                to: '/theme/misc'
+              }
+            ]
+          },
+          {
+            label: 'Template Pages',
+            icon: 'pi pi-fw pi-file',
+            items: [
+              {
+                label: 'Empty Page',
+                icon: 'pi pi-fw pi-circle-off',
+                to: '/'
+              }
+            ]
+          },
+          {
+            label: 'Menu Hierarchy',
+            icon: 'pi pi-fw pi-search',
+            items: [
+              {
+                label: 'Submenu 1',
+                icon: 'pi pi-fw pi-bookmark',
+                items: [
+                  {
+                    label: 'Submenu 1.1',
+                    icon: 'pi pi-fw pi-bookmark',
+                    items: [
+                      {
+                        label: 'Submenu 1.1.1',
+                        icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                        label: 'Submenu 1.1.2',
+                        icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                        label: 'Submenu 1.1.3',
+                        icon: 'pi pi-fw pi-bookmark'
+                      }
+                    ]
+                  },
+                  {
+                    label: 'Submenu 1.2',
+                    icon: 'pi pi-fw pi-bookmark',
+                    items: [
+                      {
+                        label: 'Submenu 1.2.1',
+                        icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                        label: 'Submenu 1.2.2',
+                        icon: 'pi pi-fw pi-bookmark'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                label: 'Submenu 2',
+                icon: 'pi pi-fw pi-bookmark',
+                items: [
+                  {
+                    label: 'Submenu 2.1',
+                    icon: 'pi pi-fw pi-bookmark',
+                    items: [
+                      {
+                        label: 'Submenu 2.1.1',
+                        icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                        label: 'Submenu 2.1.2',
+                        icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                        label: 'Submenu 2.1.3',
+                        icon: 'pi pi-fw pi-bookmark'
+                      }
+                    ]
+                  },
+                  {
+                    label: 'Submenu 2.2',
+                    icon: 'pi pi-fw pi-bookmark',
+                    items: [
+                      {
+                        label: 'Submenu 2.2.1',
+                        icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                        label: 'Submenu 2.2.2',
+                        icon: 'pi pi-fw pi-bookmark'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            label: 'Documentation',
+            icon: 'pi pi-fw pi-question',
+            command: () => history.push('/theme/documentation')
+          },
+          {
+            label: 'View Source',
+            icon: 'pi pi-fw pi-search',
+            command: () => {
+              window.location = 'https://github.com/primefaces/sigma'
+            }
+          }
+        ]
+      }
+    ]
+    : defaultThemeMenu
+
+  const projectMenu = [
     {
       label: 'Dashboard',
       icon: 'pi pi-fw pi-home',
-      command: () => history.push('/theme')
-    },
-    {
-      label: 'Menu Modes',
-      icon: 'pi pi-fw pi-cog',
-      items: [
-        {
-          label: 'Static Menu',
-          icon: 'pi pi-fw pi-bars',
-          command: () => setLayoutMode('static')
-        },
-        {
-          label: 'Overlay Menu',
-          icon: 'pi pi-fw pi-bars',
-          command: () => setLayoutMode('overlay')
-        }
-      ]
-    },
-    {
-      label: 'Menu Colors',
-      icon: 'pi pi-fw pi-align-left',
-      items: [
-        {
-          label: 'Dark',
-          icon: 'pi pi-fw pi-bars',
-          command: () => setLayoutColorMode('dark')
-        },
-        {
-          label: 'Light',
-          icon: 'pi pi-fw pi-bars',
-          command: () => setLayoutColorMode('light')
-        }
-      ]
-    },
-    {
-      label: 'Components',
-      icon: 'pi pi-fw pi-globe',
-      badge: '9',
-      items: [
-        {
-          label: 'Sample Page',
-          icon: 'pi pi-fw pi-th-large',
-          to: '/theme/sample'
-        },
-        { label: 'Forms', icon: 'pi pi-fw pi-file', to: '/theme/forms' },
-        { label: 'Data', icon: 'pi pi-fw pi-table', to: '/theme/data' },
-        { label: 'Panels', icon: 'pi pi-fw pi-list', to: '/theme/panels' },
-        {
-          label: 'Overlays',
-          icon: 'pi pi-fw pi-clone',
-          to: '/theme/overlays'
-        },
-        { label: 'Menus', icon: 'pi pi-fw pi-plus', to: '/theme/menus' },
-        {
-          label: 'Messages',
-          icon: 'pi pi-fw pi-spinner',
-          to: '/theme/messages'
-        },
-        {
-          label: 'Charts',
-          icon: 'pi pi-fw pi-chart-bar',
-          to: '/theme/charts'
-        },
-        { label: 'Misc', icon: 'pi pi-fw pi-upload', to: '/theme/misc' }
-      ]
-    },
-    {
-      label: 'Template Pages',
-      icon: 'pi pi-fw pi-file',
-      items: [{ label: 'Empty Page', icon: 'pi pi-fw pi-circle-off', to: '/' }]
-    },
-    {
-      label: 'Menu Hierarchy',
-      icon: 'pi pi-fw pi-search',
-      items: [
-        {
-          label: 'Submenu 1',
-          icon: 'pi pi-fw pi-bookmark',
-          items: [
-            {
-              label: 'Submenu 1.1',
-              icon: 'pi pi-fw pi-bookmark',
-              items: [
-                { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-                { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-                { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' }
-              ]
-            },
-            {
-              label: 'Submenu 1.2',
-              icon: 'pi pi-fw pi-bookmark',
-              items: [
-                { label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' },
-                { label: 'Submenu 1.2.2', icon: 'pi pi-fw pi-bookmark' }
-              ]
-            }
-          ]
-        },
-        {
-          label: 'Submenu 2',
-          icon: 'pi pi-fw pi-bookmark',
-          items: [
-            {
-              label: 'Submenu 2.1',
-              icon: 'pi pi-fw pi-bookmark',
-              items: [
-                { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-                { label: 'Submenu 2.1.3', icon: 'pi pi-fw pi-bookmark' }
-              ]
-            },
-            {
-              label: 'Submenu 2.2',
-              icon: 'pi pi-fw pi-bookmark',
-              items: [
-                { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                { label: 'Submenu 2.2.2', icon: 'pi pi-fw pi-bookmark' }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      label: 'Documentation',
-      icon: 'pi pi-fw pi-question',
-      command: () => history.push('/theme/documentation')
-    },
-    {
-      label: 'View Source',
-      icon: 'pi pi-fw pi-search',
-      command: () => {
-        window.location = 'https://github.com/primefaces/sigma'
-      }
+      command: () => history.push('/')
     }
   ]
+
+  const menu = [...themeMenu, ...projectMenu]
 
   let menuClick
 
@@ -208,7 +276,7 @@ const App = ({ history, location }) => {
     menuClick = false
   }
 
-  const onToggleMenu = ({ preventDefault }) => {
+  const onToggleMenu = () => {
     menuClick = true
 
     if (window.innerWidth > 1024) {
@@ -220,8 +288,6 @@ const App = ({ history, location }) => {
     } else {
       setMobileMenuActive(!mobileMenuActive)
     }
-
-    preventDefault()
   }
 
   const onSidebarClick = () => {
@@ -238,58 +304,44 @@ const App = ({ history, location }) => {
     }
   }
 
-  const renderApp = () => {
-    const logo =
-      layoutColorMode === 'dark'
-        ? 'assets/layout/images/logo-white.svg'
-        : 'assets/layout/images/logo.svg'
+  const logo =
+    layoutColorMode === 'dark'
+      ? 'assets/layout/images/logo-white.svg'
+      : 'assets/layout/images/logo.svg'
 
-    const wrapperClass = classNames('layout-wrapper', {
-      'layout-overlay': layoutMode === 'overlay',
-      'layout-static': layoutMode === 'static',
-      'layout-static-sidebar-inactive':
-        staticMenuInactive && layoutMode === 'static',
-      'layout-overlay-sidebar-active':
-        overlayMenuActive && layoutMode === 'overlay',
-      'layout-mobile-sidebar-active': mobileMenuActive
-    })
-    const sidebarClassName = classNames('layout-sidebar', {
-      'layout-sidebar-dark': layoutColorMode === 'dark'
-    })
-
-    return (
-      <div className={wrapperClass} onClick={onWrapperClick}>
-        <Topbar onToggleMenu={onToggleMenu} />
-        <div className={sidebarClassName} onClick={onSidebarClick}>
-          <ScrollPanel ref={layoutMenuScroller} style={{ height: '100%' }}>
-            <div className='layout-sidebar-scroll-content'>
-              <div className='layout-logo'>
-                <img alt='Logo' src={logo} />
-              </div>
-              <Profile />
-              <Menu model={menu} onMenuItemClick={onMenuItemClick} />
-            </div>
-          </ScrollPanel>
-        </div>
-
-        <div className='layout-main'>
-          <Router />
-        </div>
-        <Footer />
-        <div className='layout-mask' />
-      </div>
-    )
-  }
+  const wrapperClass = classNames('layout-wrapper', {
+    'layout-overlay': layoutMode === 'overlay',
+    'layout-static': layoutMode === 'static',
+    'layout-static-sidebar-inactive':
+      staticMenuInactive && layoutMode === 'static',
+    'layout-overlay-sidebar-active':
+      overlayMenuActive && layoutMode === 'overlay',
+    'layout-mobile-sidebar-active': mobileMenuActive
+  })
+  const sidebarClassName = classNames('layout-sidebar', {
+    'layout-sidebar-dark': layoutColorMode === 'dark'
+  })
 
   return (
-    <>
-      {location.pathname === '/login' ? (
-        <Route path='/login' component={LoginPage} />
-      ) : (
-        renderApp()
-      )}
-    </>
-  )
-}
+    <div className={wrapperClass} onClick={onWrapperClick}>
+      <Topbar onToggleMenu={onToggleMenu} />
+      <div className={sidebarClassName} onClick={onSidebarClick}>
+        <ScrollPanel ref={layoutMenuScroller} style={{ height: '100%' }}>
+          <div className='layout-sidebar-scroll-content'>
+            <div className='layout-logo'>
+              <img alt='Logo' src={logo} />
+            </div>
+            <Profile />
+            <Menu model={menu} onMenuItemClick={onMenuItemClick} />
+          </div>
+        </ScrollPanel>
+      </div>
 
-export default withRouter(App)
+      <div className='layout-main'>{children}</div>
+      <Footer />
+      <div className='layout-mask' />
+    </div>
+  )
+})
+
+export default App

@@ -1,10 +1,8 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-// Home
+// Theme Components
 import Dashboard from './template/pages/Dashboard'
-
-// Components
 import FormsDemo from './template/pages/components/FormsDemo'
 import SampleDemo from './template/pages/components/SampleDemo'
 import PanelsDemo from './template/pages/components/PanelsDemo'
@@ -14,28 +12,64 @@ import MessagesDemo from './template/pages/components/MessagesDemo'
 import MiscDemo from './template/pages/components/MiscDemo'
 import DataDemo from './template/pages/components/DataDemo'
 import ChartsDemo from './template/pages/components/ChartsDemo'
-
-// Template Pages
-import EmptyPage from './template/pages/template-pages/EmptyPage'
-
-// Documentation
 import Documentation from './template/pages/documentation/Documentation'
+
+// Project Pages
+import Home from './pages/home/Home'
+import Login from './pages/auth/Login'
+
+// Project Components, Services and Utilities
+import { Admin } from './containers'
+
+const authService = {
+  isAuthenticated: () => true
+}
+
+const isDevelopMode = () => process.env.NODE_ENV === 'development'
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      authService.isAuthenticated() ? (
+        <Admin {...props} isDevelopMode={isDevelopMode}>
+          <Component {...props} />
+        </Admin>
+      ) : (
+        <Redirect to={{ pathname: '/' }} />
+      )
+    }
+  />
+)
+
+function ThemeRoutes() {
+  if (isDevelopMode()) {
+    return (
+      <>
+        <PrivateRoute exact path='/theme' component={Dashboard} />
+        <PrivateRoute path='/theme/forms' component={FormsDemo} />
+        <PrivateRoute path='/theme/sample' component={SampleDemo} />
+        <PrivateRoute path='/theme/data' component={DataDemo} />
+        <PrivateRoute path='/theme/panels' component={PanelsDemo} />
+        <PrivateRoute path='/theme/overlays' component={OverlaysDemo} />
+        <PrivateRoute path='/theme/menus' component={MenusDemo} />
+        <PrivateRoute path='/theme/messages' component={MessagesDemo} />
+        <PrivateRoute path='/theme/charts' component={ChartsDemo} />
+        <PrivateRoute path='/theme/misc' component={MiscDemo} />
+        <PrivateRoute path='/theme/documentation' component={Documentation} />
+      </>
+    )
+  }
+
+  return null
+}
 
 function Router() {
   return (
     <Switch>
-      <Route exact path='/' component={EmptyPage} />
-      <Route exact path='/theme' component={Dashboard} />
-      <Route path='/theme/forms' component={FormsDemo} />
-      <Route path='/theme/sample' component={SampleDemo} />
-      <Route path='/theme/data' component={DataDemo} />
-      <Route path='/theme/panels' component={PanelsDemo} />
-      <Route path='/theme/overlays' component={OverlaysDemo} />
-      <Route path='/theme/menus' component={MenusDemo} />
-      <Route path='/theme/messages' component={MessagesDemo} />
-      <Route path='/theme/charts' component={ChartsDemo} />
-      <Route path='/theme/misc' component={MiscDemo} />
-      <Route path='/theme/documentation' component={Documentation} />
+      <Route path='/login' component={Login} />
+      <PrivateRoute exact path='/' component={Home} />
+      <ThemeRoutes />
     </Switch>
   )
 }
