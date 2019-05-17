@@ -1,41 +1,43 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-// Home
-import Dashboard from './template/pages/Dashboard'
+// Theme Components (comment when build)
+import ThemeRoutes from './template/ThemeRoutes'
 
-// Components
-import FormsDemo from './template/pages/components/FormsDemo'
-import SampleDemo from './template/pages/components/SampleDemo'
-import PanelsDemo from './template/pages/components/PanelsDemo'
-import OverlaysDemo from './template/pages/components/OverlaysDemo'
-import MenusDemo from './template/pages/components/MenusDemo'
-import MessagesDemo from './template/pages/components/MessagesDemo'
-import MiscDemo from './template/pages/components/MiscDemo'
-import DataDemo from './template/pages/components/DataDemo'
-import ChartsDemo from './template/pages/components/ChartsDemo'
+// Project Pages
+import Home from './pages/home/Home'
+import Login from './pages/auth/Login'
 
-// Template Pages
-import EmptyPage from './template/pages/template-pages/EmptyPage'
+// Project Components, Services and Utilities
+import { Admin } from './containers'
 
-// Documentation
-import Documentation from './template/pages/documentation/Documentation'
+const authService = {
+  isAuthenticated: () => true
+}
+
+const isDevelopMode = () => process.env.NODE_ENV === 'development'
+
+export const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      authService.isAuthenticated() ? (
+        <Admin {...props} isDevelopMode={isDevelopMode}>
+          <Component {...props} />
+        </Admin>
+      ) : (
+        <Redirect to={{ pathname: '/' }} />
+      )
+    }
+  />
+)
 
 function Router() {
   return (
     <Switch>
-      <Route exact path='/' component={EmptyPage} />
-      <Route exact path='/theme' component={Dashboard} />
-      <Route path='/theme/forms' component={FormsDemo} />
-      <Route path='/theme/sample' component={SampleDemo} />
-      <Route path='/theme/data' component={DataDemo} />
-      <Route path='/theme/panels' component={PanelsDemo} />
-      <Route path='/theme/overlays' component={OverlaysDemo} />
-      <Route path='/theme/menus' component={MenusDemo} />
-      <Route path='/theme/messages' component={MessagesDemo} />
-      <Route path='/theme/charts' component={ChartsDemo} />
-      <Route path='/theme/misc' component={MiscDemo} />
-      <Route path='/theme/documentation' component={Documentation} />
+      <Route path='/login' component={Login} />
+      <PrivateRoute exact path='/' component={Home} />
+      <ThemeRoutes /> {/* (comment when build) */}
     </Switch>
   )
 }

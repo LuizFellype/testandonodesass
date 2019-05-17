@@ -3,12 +3,11 @@ import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import classNames from 'classnames'
 
 // Layout
-import Topbar from './containers/TopBar/Topbar'
-import Menu from './containers/Menu/Menu'
-import Footer from './containers/Footer'
+import Topbar from './TopBar/Topbar'
+import Menu from './Menu/Menu'
+import Footer from './Footer'
 
 // Components
-import Profile from './components/Profile/Profile'
 
 // CSS
 import 'primereact/resources/themes/nova-light/theme.css'
@@ -16,16 +15,18 @@ import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 import 'fullcalendar/dist/fullcalendar.css'
-import '../layout/layout.css'
+import '../../layout/layout.css'
 
 const defaultThemeMenu = []
 
-const App = React.memo(({ history, children, isDevelopMode }) => {
+export const Admin = React.memo(props => {
   const [layoutMode, setLayoutMode] = useState('static')
   const [layoutColorMode, setLayoutColorMode] = useState('dark')
   const [staticMenuInactive, setStaticMenuInactive] = useState(false)
   const [overlayMenuActive, setOverlayMenuActive] = useState(false)
   const [mobileMenuActive, setMobileMenuActive] = useState(false)
+
+  const { history, children, isDevelopMode } = props
 
   const layoutMenuScroller = useRef(null)
 
@@ -53,14 +54,17 @@ const App = React.memo(({ history, children, isDevelopMode }) => {
     } else removeClass(document.body, 'body-overflow-hidden')
   })
 
-  console.log('process.env', process.env.NODE_ENV)
-
   const themeMenu = isDevelopMode()
     ? [
       {
-        label: 'Dashboard',
+        label: 'Theme',
         icon: 'pi pi-fw pi-eye',
         items: [
+          {
+            label: 'Dashboard',
+            icon: 'pi pi-fw pi-cog',
+            command: () => (window.location = '/theme')
+          },
           {
             label: 'Menu Modes',
             icon: 'pi pi-fw pi-cog',
@@ -257,7 +261,7 @@ const App = React.memo(({ history, children, isDevelopMode }) => {
 
   const projectMenu = [
     {
-      label: 'Dashboard',
+      label: 'Home',
       icon: 'pi pi-fw pi-home',
       command: () => history.push('/')
     }
@@ -292,9 +296,7 @@ const App = React.memo(({ history, children, isDevelopMode }) => {
 
   const onSidebarClick = () => {
     menuClick = true
-    setTimeout(() => {
-      layoutMenuScroller.current.moveBar()
-    }, 500)
+    layoutMenuScroller.current.moveBar()
   }
 
   const onMenuItemClick = ({ item }) => {
@@ -306,8 +308,8 @@ const App = React.memo(({ history, children, isDevelopMode }) => {
 
   const logo =
     layoutColorMode === 'dark'
-      ? 'assets/layout/images/logo-white.svg'
-      : 'assets/layout/images/logo.svg'
+      ? '/assets/layout/images/logo-white.svg'
+      : '/assets/layout/images/logo.svg'
 
   const wrapperClass = classNames('layout-wrapper', {
     'layout-overlay': layoutMode === 'overlay',
@@ -325,23 +327,22 @@ const App = React.memo(({ history, children, isDevelopMode }) => {
   return (
     <div className={wrapperClass} onClick={onWrapperClick}>
       <Topbar onToggleMenu={onToggleMenu} />
+
       <div className={sidebarClassName} onClick={onSidebarClick}>
         <ScrollPanel ref={layoutMenuScroller} style={{ height: '100%' }}>
           <div className='layout-sidebar-scroll-content'>
             <div className='layout-logo'>
               <img alt='Logo' src={logo} />
             </div>
-            <Profile />
             <Menu model={menu} onMenuItemClick={onMenuItemClick} />
           </div>
         </ScrollPanel>
       </div>
 
       <div className='layout-main'>{children}</div>
+
       <Footer />
       <div className='layout-mask' />
     </div>
   )
 })
-
-export default App
