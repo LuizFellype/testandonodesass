@@ -17,7 +17,7 @@ const authService = {
 
 const isDevelopMode = () => process.env.NODE_ENV === 'development'
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
