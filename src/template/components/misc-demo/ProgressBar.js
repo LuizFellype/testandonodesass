@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 // Prime ProgressBar component
 import { ProgressBar } from 'primereact/progressbar'
@@ -6,20 +6,20 @@ import { ProgressBar } from 'primereact/progressbar'
 const Progress = () => {
   const [value, setValue] = useState(0)
 
-  let interval
+  const interval = useRef(null)
 
   // Component did mount
   useEffect(() => {
-    interval = setInterval(() => {
+    interval.current = setInterval(() => {
       let val = value
       val += Math.floor(Math.random() * 100) + 1
       if (val >= 100) {
         val = 100
-        clearInterval(interval)
+        clearInterval(interval.current)
       }
       setValue(val)
     }, 2000)
-  }, [])
+  }, [interval, value])
 
   // Component will unmount
   useEffect(() => () => clearInterval(interval), [])
