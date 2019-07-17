@@ -18,7 +18,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "react/jsx-ues-vars": "error",
-    "react/jsx-ues-react": "error"
+    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "error"
   }
 }
