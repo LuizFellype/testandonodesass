@@ -12,6 +12,7 @@ const LoginPage = () => (
     <img src={avatar} className='user-avatar' alt='Logo' />
     <h1>Faça login para continuar no sistema</h1>
     <form
+      // eslint-disable-next-line
       onSubmit={() => console.log('this.handleLogin')}
       className='ng-pristine ng-valid'
     >
