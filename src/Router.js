@@ -37,7 +37,7 @@ function Router() {
     <Switch>
       <Route path='/login' component={Login} />
       <PrivateRoute exact path='/' component={Home} />
-      <ThemeRoutes /> {/* (comment when build) */}
+      {isDevelopMode() && <ThemeRoutes />}
     </Switch>
   )
 }
