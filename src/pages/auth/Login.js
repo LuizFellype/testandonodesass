@@ -7,7 +7,7 @@ import LoginWrapper from '../../components/auth/LoginWrapper'
 import LoginRow from '../../components/auth/LoginRow'
 import Label from '../../components/auth/Label'
 
-const LoginPage = () => (
+const LoginPage = props => (
   <LoginWrapper>
     <img src={avatar} className='user-avatar' alt='Logo' />
     <h1>Faça login para continuar no sistema</h1>
@@ -24,7 +24,7 @@ const LoginPage = () => (
         <Label>Senha: </Label>
         <Password placeholder='*******' />
       </LoginRow>
-      <Button label='Posso acessar?' />
+      <Button onClick={() => props.history.push('/')} label='Posso acessar?' />
     </form>
   </LoginWrapper>
 )
