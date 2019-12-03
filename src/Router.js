@@ -1,8 +1,6 @@
+import { createHashHistory } from 'history'
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-
-// Theme Components (comment when build)
-import ThemeRoutes from './template/ThemeRoutes'
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // Project Pages
 import Home from './pages/home/Home'
@@ -15,14 +13,14 @@ const authService = {
   isAuthenticated: () => true
 }
 
-const isDevelopMode = () => process.env.NODE_ENV === 'development'
+const history = createHashHistory()
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+export const RouteWithTheme = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       authService.isAuthenticated() ? (
-        <Admin {...props} isDevelopMode={isDevelopMode}>
+        <Admin {...props}>
           <Component {...props} />
         </Admin>
       ) : (
@@ -32,14 +30,15 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 )
 
-function Router() {
+function RouterConfig () {
   return (
-    <Switch>
-      <Route path='/login' component={Login} />
-      <PrivateRoute exact path='/' component={Home} />
-      {isDevelopMode() && <ThemeRoutes />}
-    </Switch>
+    <Router history={history}>
+      <Switch>
+        <Route path='/login' component={Login} />
+        <RouteWithTheme exact path='/' component={Home} />
+      </Switch>
+    </Router>
   )
 }
 
-export default Router
+export default RouterConfig
