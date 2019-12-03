@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel'
 import classNames from 'classnames'
 
@@ -75,7 +75,7 @@ export const Admin = React.memo(props => {
     menuClick = false
   }
 
-  const onToggleMenu = () => {
+  const onToggleMenu = useCallback(() => {
     menuClick = true
 
     if (window.innerWidth > 1024) {
@@ -87,7 +87,7 @@ export const Admin = React.memo(props => {
     } else {
       setMobileMenuActive(!mobileMenuActive)
     }
-  }
+  }, [layoutMode, overlayMenuActive, staticMenuInactive, mobileMenuActive])
 
   const onSidebarClick = () => {
     menuClick = true
