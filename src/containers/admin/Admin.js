@@ -64,19 +64,19 @@ export const Admin = React.memo(props => {
     }
   ]
 
-  let menuClick
+  const menuClick = React.useRef(undefined)
 
   const onWrapperClick = () => {
-    if (!menuClick) {
+    if (!menuClick.current) {
       setOverlayMenuActive(false)
       setMobileMenuActive(false)
     }
 
-    menuClick = false
+    menuClick.current = false
   }
 
   const onToggleMenu = useCallback(() => {
-    menuClick = true
+    menuClick.current = true
 
     if (window.innerWidth > 1024) {
       if (layoutMode === 'overlay') {
@@ -90,7 +90,7 @@ export const Admin = React.memo(props => {
   }, [layoutMode, overlayMenuActive, staticMenuInactive, mobileMenuActive])
 
   const onSidebarClick = () => {
-    menuClick = true
+    menuClick.current = true
     layoutMenuScroller.current.moveBar()
   }
 
