@@ -36,3 +36,14 @@ h2 {
 .p-g {
     -ms-flex-wrap: wrap;
 }
+
+.flex {
+  display: flex;
+  width: 100%;
+}
+
+.p-fluid .p-button {
+  width: max-content;
+}
+  
+  

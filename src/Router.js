@@ -3,7 +3,9 @@ import React from 'react'
 import { Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // Project Pages
-import Home from './pages/home/Home'
+import CoursesPage from './pages/courses/Courses'
+import DisciplinesPage from './pages/disciplines/Disciplines'
+import ClassesPage from './pages/classes/Classes'
 import Login from './pages/auth/Login'
 
 // Project Components, Services and Utilities
@@ -35,7 +37,12 @@ function RouterConfig () {
     <Router history={history}>
       <Switch>
         <Route path='/login' component={Login} />
-        <RouteWithTheme exact path='/' component={Home} />
+
+        <RouteWithTheme path='/courses' component={CoursesPage} />
+        <RouteWithTheme path='/disciplines' component={DisciplinesPage} />
+        <RouteWithTheme path='/classes' component={ClassesPage} />
+
+        <Redirect exact path='/' to='/courses' />
       </Switch>
     </Router>
   )

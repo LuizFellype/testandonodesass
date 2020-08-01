@@ -5,7 +5,6 @@ import classNames from 'classnames'
 // Layout
 import Topbar from './TopBar/Topbar'
 import Menu from './Menu/Menu'
-import Footer from './Footer'
 
 // Components
 
@@ -58,9 +57,19 @@ export const Admin = React.memo(props => {
   const menu = [
     ...themeMenu,
     {
-      label: 'Home',
+      label: 'Cursos',
       icon: 'pi pi-fw pi-home',
-      command: () => history.push('/')
+      command: () => history.push('/courses')
+    },
+    {
+      label: 'Disciplinas',
+      icon: 'pi pi-fw pi-home',
+      command: () => history.push('/disciplines')
+    },
+    {
+      label: 'Classes',
+      icon: 'pi pi-fw pi-home',
+      command: () => history.push('/classes')
     }
   ]
 
@@ -136,7 +145,7 @@ export const Admin = React.memo(props => {
 
       <div className='layout-main'>{children}</div>
 
-      <Footer />
+      {/* <Footer /> */}
       <div className='layout-mask' />
     </div>
   )
