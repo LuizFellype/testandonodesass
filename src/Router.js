@@ -6,6 +6,7 @@ import { Router, Switch, Route, Redirect } from 'react-router-dom'
 import CoursesPage from './pages/courses/Courses'
 import DisciplinesPage from './pages/disciplines/Disciplines'
 import ClassesPage from './pages/classes/Classes'
+import UsersPage from './pages/users/Users'
 import Login from './pages/auth/Login'
 
 // Project Components, Services and Utilities
@@ -41,6 +42,7 @@ function RouterConfig () {
         <RouteWithTheme path='/courses' component={CoursesPage} />
         <RouteWithTheme path='/disciplines' component={DisciplinesPage} />
         <RouteWithTheme path='/classes' component={ClassesPage} />
+        <RouteWithTheme path='/users' component={UsersPage} />
 
         <Redirect exact path='/' to='/courses' />
       </Switch>

@@ -70,6 +70,11 @@ export const Admin = React.memo(props => {
       label: 'Classes',
       icon: 'pi pi-fw pi-home',
       command: () => history.push('/classes')
+    },
+    {
+      label: 'Usuários',
+      icon: 'pi pi-fw pi-home',
+      command: () => history.push('/users')
     }
   ]
 

@@ -4,7 +4,7 @@
   - name: string
   - cpf: string
   - birthDate: string
-  - sex: string
+  - gender: string
   - email: string
   - phone: string
 
@@ -30,6 +30,7 @@
 
 ### Professor - (name, cpf)
   ...Person
+  - disciplines: Discipline[]
   - classes: Class[]
 
 ### Student - (name, code, cpf)
