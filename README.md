@@ -16,7 +16,7 @@
 ### Discipline - (name, course)
   - name: string
   - courses: Course[]
-  - references: string[]
+  - references: string
   - teachers: Professor[]
   
 ### Class - (startDate, code, shift)

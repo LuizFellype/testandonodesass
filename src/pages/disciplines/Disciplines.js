@@ -1,10 +1,15 @@
 import React from 'react'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
-import { addDiscipline, getAllDisciplines } from '../../services/clients'
+import {
+  addDiscipline,
+  getAllDisciplines,
+  updateDicipline
+} from '../../services/clients'
 import DisciplineForm from '../../containers/disciplineForm/DisciplineForm'
 import { itemTemplate } from '../../utils/itemTemplate'
 import { TABLE_FIlTER } from '../../utils/consts'
+import { handleUpdate } from '../../utils/handleUpdate'
 
 const nameTemplate = itemTemplate('name')
 
@@ -35,11 +40,26 @@ export default React.memo(function Courses () {
     [disciplines]
   )
 
+  const handleUpdateDisciplines = React.useCallback(
+    handleUpdate(disciplines, setDisciplines, updateDicipline),
+    [disciplines]
+  )
+
+  const [selectedDiscip, setSelectedDiscip] = React.useState()
+
   return (
     <>
-      <DisciplineForm onSubmit={handleSubmit} />
+      <DisciplineForm
+        onSubmit={handleSubmit}
+        onUpdate={handleUpdateDisciplines}
+        dataToUpdate={selectedDiscip}
+      />
 
-      <DataTable value={disciplines}>
+      <DataTable
+        value={disciplines}
+        selectionMode='single'
+        onSelectionChange={e => setSelectedDiscip(e.value)}
+      >
         <Column field='name' header='Nome da disciplina' {...TABLE_FIlTER} />
         <Column field='teachers' header='Professores' body={nameTemplate} />
         <Column

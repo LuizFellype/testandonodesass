@@ -18,7 +18,8 @@ export default React.memo(function DisciplineForm (props) {
       Professors,
       selectedProfessors,
       setProfessors,
-      setFilteredProfessors
+      setFilteredProfessors,
+      setSelectedProfessors
     },
     Autocomplete
   } = useAutocomplete(autoCompleteParams)
@@ -33,6 +34,15 @@ export default React.memo(function DisciplineForm (props) {
     getProfessors()
     // eslint-disable-next-line
   }, [])
+  React.useEffect(() => {
+    if (props.dataToUpdate) {
+      const { teachers, name, references } = props.dataToUpdate
+      document.getElementById(FIELD_ID.name).value = name
+      document.getElementById(FIELD_ID.references).value = references
+      setSelectedProfessors(teachers.map(({ name }) => name))
+    }
+    // eslint-disable-next-line
+  }, [props.dataToUpdate])
 
   const hadleSubmit = async ev => {
     ev.preventDefault()
@@ -48,6 +58,10 @@ export default React.memo(function DisciplineForm (props) {
       name,
       references,
       teachers
+    }
+
+    if (props.dataToUpdate) {
+      return props.onUpdate({ ...props.dataToUpdate, ...newDiscipline })
     }
 
     props.onSubmit(newDiscipline)

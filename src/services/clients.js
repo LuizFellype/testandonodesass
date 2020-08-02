@@ -28,21 +28,21 @@ const fakeProfessors = [
 const fakeDisciplines = [
   {
     name: 'Disciplina 1',
-    references: ['Livro Estrutura de dados e Algoritimos'],
+    references: 'Livro Estrutura de dados e Algoritimos',
     teachers: [fakeProfessors[0]],
     courses: [],
     id: 'D1'
   },
   {
     name: 'Disciplina 2',
-    references: ['Artigo Análise Refactoring Martin Fowler'],
+    references: 'Artigo Análise Refactoring Martin Fowler',
     teachers: [fakeProfessors[0], fakeProfessors[1]],
     courses: [],
     id: 'D2'
   },
   {
     name: 'Disciplina 3',
-    references: ['Refactoring: Improving the Design of Existing Code'],
+    references: 'Refactoring: Improving the Design of Existing Code',
     teachers: [fakeProfessors[1], fakeProfessors[0]],
     courses: [],
     id: 'D3'
@@ -53,13 +53,16 @@ export const getAllDisciplines = async () => {
   return fakeDisciplines
 }
 
-export const addDiscipline = async newCourseData => {
+export const addDiscipline = async newDisciplineData => {
   const newCourse = {
-    ...newCourseData,
+    ...newDisciplineData,
     id: `${new Date().getTime()}`
   }
 
   return newCourse
+}
+export const updateDicipline = async disciplineToUpdate => {
+  return disciplineToUpdate
 }
 
 const fakeCourses = [
