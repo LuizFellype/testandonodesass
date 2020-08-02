@@ -58,22 +58,22 @@ export const Admin = React.memo(props => {
     ...themeMenu,
     {
       label: 'Cursos',
-      icon: 'pi pi-fw pi-home',
+      icon: 'pi pi-fw pi-table',
       command: () => history.push('/courses')
     },
     {
       label: 'Disciplinas',
-      icon: 'pi pi-fw pi-home',
+      icon: 'pi pi-fw pi-bookmark',
       command: () => history.push('/disciplines')
     },
     {
       label: 'Classes',
-      icon: 'pi pi-fw pi-home',
+      icon: 'pi pi-fw pi-tags',
       command: () => history.push('/classes')
     },
     {
       label: 'Usuários',
-      icon: 'pi pi-fw pi-home',
+      icon: 'pi pi-fw pi-users',
       command: () => history.push('/users')
     }
   ]

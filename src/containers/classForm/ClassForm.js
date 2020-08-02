@@ -149,11 +149,12 @@ export default React.memo(function DisciplineForm (props) {
     }
 
     if (props.dataToUpdate) {
-      return props.onUpdate({
+      props.onUpdate({
         ...newClass,
         id: props.dataToUpdate.id,
         code: props.dataToUpdate.code
       })
+      return props.onCancel()
     }
 
     props.onSubmit(newClass)

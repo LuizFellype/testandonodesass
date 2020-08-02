@@ -8,7 +8,6 @@ export const handleUpdate = (
   const dataUpdated = data.map(unitData =>
     unitData.id === classToUpdate.id ? classToUpdate : unitData
   )
-
   setData(dataUpdated)
   updateRealData(classToUpdate)
     .then(() => null)

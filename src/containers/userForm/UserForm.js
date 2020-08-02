@@ -167,17 +167,26 @@ export default React.memo(function UserForm (props) {
         selectedDisciplines.includes(name)
       )
       const newProfessor = { ...newPerson, classes, disciplines }
+      if (props.dataToUpdate) {
+        props.onUpdate({ ...props.dataToUpdate, ...newProfessor }, TYPES.prof)
+        return props.onCancel()
+      }
+
       props.onSubmit(newProfessor, TYPES.prof)
       return
     }
 
     const newStudet = {
       ...newPerson,
-      enroled: classes,
-      code: new Date().getTime()
+      enroled: classes
     }
 
-    props.onSubmit(newStudet, TYPES.student)
+    if (props.dataToUpdate) {
+      props.onUpdate({ ...props.dataToUpdate, ...newStudet }, TYPES.student)
+      return props.onCancel()
+    }
+
+    props.onSubmit({ ...newStudet, code: new Date().getTime() }, TYPES.student)
   }
 
   const disciplineIsDisabled = React.useMemo(

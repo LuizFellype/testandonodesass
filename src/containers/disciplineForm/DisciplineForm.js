@@ -61,7 +61,8 @@ export default React.memo(function DisciplineForm (props) {
     }
 
     if (props.dataToUpdate) {
-      return props.onUpdate({ ...props.dataToUpdate, ...newDiscipline })
+      props.onUpdate({ ...props.dataToUpdate, ...newDiscipline })
+      return props.onCancel()
     }
 
     props.onSubmit(newDiscipline)

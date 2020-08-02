@@ -21,7 +21,7 @@ const fakeProfessors = [
     phone: '27998521112',
     classes: [],
     disciplines: [],
-    id: 'P1'
+    id: 'P2'
   }
 ]
 
@@ -121,7 +121,7 @@ const fakeStudents = [
     phone: '27998521112',
     enroled: [],
     code: 1596344172492,
-    id: 'A1'
+    id: 'A2'
   }
 ]
 export const getAllCourses = async () => {

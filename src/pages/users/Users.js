@@ -116,7 +116,7 @@ export default React.memo(function Users () {
               header='Disciplinas'
               body={nameTemplate}
             />
-            <Column field='classes' header='Disciplinas' body={classTemplate} />
+            <Column field='classes' header='Turmas' body={classTemplate} />
           </DataTable>
         </TabPanel>
       </TabView>

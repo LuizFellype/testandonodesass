@@ -12,6 +12,12 @@ const FIELD_ID = {
 const autoCompleteParams = { id: 'Disciplines' }
 
 export default React.memo(function CourseForm (props) {
+  // const hitMaxOfDisciplines = React.useMemo(() => {
+  //   if (props.dataToUpdate) {
+  //     console.log(props.dataToUpdate.maxDisciplines, document.getElementById(FIELD_ID.maxDiscipline).value)
+  //   }
+  // }, [props.dataToUpdate])
+  const [hitMaxOfDisciplines, setHitMaxOfDiscipline] = React.useState(false)
   const {
     data: {
       Disciplines,
@@ -21,13 +27,32 @@ export default React.memo(function CourseForm (props) {
       setSelectedDisciplines
     },
     Autocomplete
-  } = useAutocomplete(autoCompleteParams)
+  } = useAutocomplete({
+    ...autoCompleteParams,
+    autoCompleteData: { disabled: hitMaxOfDisciplines }
+  })
 
   const _setDisciplines = React.useCallback(disciplines => {
     setDisciplines(disciplines)
     setFilteredDisciplines(disciplines.map(({ name }) => name))
     // eslint-disable-next-line
   }, [])
+
+  React.useEffect(() => {
+    const { value: maxDiscipInput } =
+      document.getElementById(FIELD_ID.maxDiscipline) || {}
+    const max = Number(maxDiscipInput)
+
+    if (max !== 0 && selectedDisciplines.length === max) {
+      setHitMaxOfDiscipline(true)
+    } else if (max !== 0 && selectedDisciplines.length > max) {
+      const maxOfDiscip = selectedDisciplines.slice(0, max)
+      setSelectedDisciplines(maxOfDiscip)
+    } else {
+      hitMaxOfDisciplines && setHitMaxOfDiscipline(false)
+    }
+    // eslint-disable-next-line
+  }, [selectedDisciplines, props.dataToUpdate])
 
   React.useEffect(() => {
     const getDisciplines = async () => {
@@ -68,7 +93,8 @@ export default React.memo(function CourseForm (props) {
     }
 
     if (props.dataToUpdate) {
-      return props.onUpdate({ ...props.dataToUpdate, ...newCourse })
+      props.onUpdate({ ...props.dataToUpdate, ...newCourse })
+      return props.onCancel()
     }
 
     props.onSubmit(newCourse)
