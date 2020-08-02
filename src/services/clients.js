@@ -133,6 +133,9 @@ export const addCourse = async newCourseData => {
 
   return newCourse
 }
+export const updateCourse = async courseToUpdate => {
+  return courseToUpdate
+}
 
 export const getAllProfessors = async () => {
   return fakeProfessors

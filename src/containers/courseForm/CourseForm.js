@@ -17,36 +17,57 @@ export default React.memo(function CourseForm (props) {
       Disciplines,
       selectedDisciplines,
       setDisciplines,
-      setFilteredDisciplines
+      setFilteredDisciplines,
+      setSelectedDisciplines
     },
     Autocomplete
   } = useAutocomplete(autoCompleteParams)
 
+  const _setDisciplines = React.useCallback(disciplines => {
+    setDisciplines(disciplines)
+    setFilteredDisciplines(disciplines.map(({ name }) => name))
+    // eslint-disable-next-line
+  }, [])
+
   React.useEffect(() => {
     const getDisciplines = async () => {
       const disciplines = await getAllDisciplines()
-      setDisciplines(disciplines)
-      setFilteredDisciplines(disciplines.map(({ name }) => name))
+      _setDisciplines(disciplines)
     }
 
     getDisciplines()
     // eslint-disable-next-line
   }, [])
 
+  React.useEffect(() => {
+    if (props.dataToUpdate) {
+      document.getElementById(FIELD_ID.name).value = props.dataToUpdate.name
+      document.getElementById(FIELD_ID.maxDiscipline).value =
+        props.dataToUpdate.maxDisciplines
+      setSelectedDisciplines(
+        props.dataToUpdate.disciplines.map(({ name }) => name)
+      )
+    }
+
+    // eslint-disable-next-line
+  }, [props.dataToUpdate])
+
   const hadleSubmit = async ev => {
     ev.preventDefault()
 
     const { value: name } = ev.currentTarget[FIELD_ID.name]
     const { value: maxDisciplines } = ev.currentTarget[FIELD_ID.maxDiscipline]
-
     const courseDisciplines = Disciplines.filter(discipline =>
       selectedDisciplines.includes(discipline.name)
     )
-
     const newCourse = {
       name,
       maxDisciplines: Number(maxDisciplines),
       disciplines: courseDisciplines
+    }
+
+    if (props.dataToUpdate) {
+      return props.onUpdate({ ...props.dataToUpdate, ...newCourse })
     }
 
     props.onSubmit(newCourse)
@@ -69,11 +90,15 @@ export default React.memo(function CourseForm (props) {
           <InputText id={FIELD_ID.maxDiscipline} type='number' required />
         </div>
         <div className='p-field p-col-12'>
-          <label>Professores</label>
+          <label>Disciplinas</label>
           {Autocomplete}
         </div>
         <div className='p-col-12 flex p-justify-end'>
-          <Button type='submit' label='Adicionar' icon='pi pi-check' />
+          <Button
+            type='submit'
+            label={props.dataToUpdate ? 'Atualizar' : 'Adicionar'}
+            icon='pi pi-check'
+          />
         </div>
       </div>
     </form>

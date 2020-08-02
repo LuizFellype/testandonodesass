@@ -2,7 +2,7 @@ import React from 'react'
 import CourseForm from '../../containers/courseForm/CourseForm'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
-import { addCourse, getAllCourses } from '../../services/clients'
+import { addCourse, updateCourse, getAllCourses } from '../../services/clients'
 import { itemTemplate } from '../../utils/itemTemplate'
 import { TABLE_FIlTER } from '../../utils/consts'
 
@@ -34,12 +34,40 @@ export default React.memo(function Courses () {
     },
     [courses]
   )
+  const handleUpdateCourse = React.useCallback(
+    courseToUpdate => {
+      const coursesCopy = [...courses]
+
+      const coursesUpdated = courses.map(course =>
+        course.id === courseToUpdate.id ? courseToUpdate : course
+      )
+
+      setCourses(coursesUpdated)
+      updateCourse(courseToUpdate)
+        .then(() => null)
+        .catch(error => {
+          console.log('To do: Show some error', error)
+          setCourses(coursesCopy)
+        })
+    },
+    [courses]
+  )
+
+  const [courseSelected, setCourseSelected] = React.useState()
 
   return (
     <>
-      <CourseForm onSubmit={handleSubmit} />
+      <CourseForm
+        onSubmit={handleSubmit}
+        onUpdate={handleUpdateCourse}
+        dataToUpdate={courseSelected}
+      />
 
-      <DataTable value={courses}>
+      <DataTable
+        value={courses}
+        selectionMode='single'
+        onSelectionChange={e => setCourseSelected(e.value)}
+      >
         <Column field='name' header='Nome do curso' {...TABLE_FIlTER} />
         <Column
           field='disciplines'
