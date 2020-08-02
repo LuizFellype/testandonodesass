@@ -4,6 +4,7 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { addCourse, getAllCourses } from '../../services/clients'
 import { itemTemplate } from '../../utils/itemTemplate'
+import { TABLE_FIlTER } from '../../utils/consts'
 
 const disciplineTemplate = itemTemplate('name')
 
@@ -23,14 +24,13 @@ export default React.memo(function Courses () {
     newCourseData => {
       const coursesCopy = [...courses]
 
+      setCourses([newCourseData, ...courses])
       addCourse(newCourseData)
         .then(courseCreated => setCourses([courseCreated, ...coursesCopy]))
         .catch(error => {
           console.log('To do: Show some error', error)
           setCourses(coursesCopy)
         })
-
-      setCourses([newCourseData, ...courses])
     },
     [courses]
   )
@@ -40,7 +40,7 @@ export default React.memo(function Courses () {
       <CourseForm onSubmit={handleSubmit} />
 
       <DataTable value={courses}>
-        <Column field='name' header='Nome do curso' />
+        <Column field='name' header='Nome do curso' {...TABLE_FIlTER} />
         <Column
           field='disciplines'
           header='Disciplinas'

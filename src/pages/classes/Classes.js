@@ -3,6 +3,7 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { addClass, getAllClasses } from '../../services/clients'
 import ClassForm from '../../containers/classForm/ClassForm'
+import { TABLE_FIlTER } from '../../utils/consts'
 
 // const startDateTemplate = (rowData, col) => {
 //   const date = new Date(rowData[col.field])
@@ -48,18 +49,15 @@ export default React.memo(function Courses () {
     },
     [classes]
   )
-  console.log(classes)
+
   return (
     <>
       <ClassForm onSubmit={handleSubmit} />
 
       <DataTable value={classes}>
-        <Column field='code' header='Código' />
-        <Column
-          field='startDate'
-          header='Data de início'
-          // body={startDateTemplate}
-        />
+        <Column field='code' header='Código' {...TABLE_FIlTER} />
+        <Column field='shift' header='Turno' {...TABLE_FIlTER} />
+        <Column field='startDate' header='Data de início' {...TABLE_FIlTER} />
         <Column field='discipline' header='Disciplina' body={nameTemplate} />
         <Column field='teacher' header='Professores' body={nameTemplate} />
       </DataTable>
