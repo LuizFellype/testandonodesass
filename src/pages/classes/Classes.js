@@ -58,11 +58,15 @@ export default React.memo(function Classes () {
   )
 
   const [classSelected, setClassSelected] = React.useState()
-
+  const handelCancelForm = React.useCallback(
+    () => setClassSelected(undefined),
+    []
+  )
   return (
     <>
       <ClassForm
         onSubmit={handleSubmit}
+        onCancel={handelCancelForm}
         dataToUpdate={classSelected}
         onUpdate={handleUpdateClass}
       />
@@ -71,6 +75,7 @@ export default React.memo(function Classes () {
         value={classes}
         selectionMode='single'
         onSelectionChange={e => setClassSelected(e.value)}
+        selection={classSelected}
       >
         <Column field='code' header='Código' {...TABLE_FIlTER} />
         <Column field='shift' header='Turno' {...TABLE_FIlTER} />

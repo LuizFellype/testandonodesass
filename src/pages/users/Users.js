@@ -78,8 +78,13 @@ export default React.memo(function Users () {
   const filterDataTableProps = React.useMemo(
     () => ({
       selectionMode: 'single',
-      onSelectionChange: e => setUserSelected(e.value)
+      onSelectionChange: e => setUserSelected(e.value),
+      selection: userSelected
     }),
+    [userSelected]
+  )
+  const handelCancelForm = React.useCallback(
+    () => setUserSelected(undefined),
     []
   )
   return (
@@ -87,6 +92,7 @@ export default React.memo(function Users () {
       <UserForm
         onSubmit={handleSubmit}
         onUpdate={handleUpdateUser}
+        onCancel={handelCancelForm}
         dataToUpdate={userSelected}
       />
 

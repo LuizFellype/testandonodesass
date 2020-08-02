@@ -1,13 +1,13 @@
 import { Calendar } from 'primereact/calendar'
 import React from 'react'
 import { InputText } from 'primereact/inputtext'
-import { Button } from 'primereact/button'
 import { useAutocomplete } from '../../components/useAutocomplete/useAutocomplete'
 import {
   getAllDisciplines,
   getAllProfessorsByDiscipline
 } from '../../services/clients'
 import { formatDate } from '../../utils/formatDate'
+import { AddUpdateAndCancelButton } from '../../components/addUpdateButton/AddUpdateButton'
 
 const FIELD_ID = {
   maxVacancies: 'maxVacancies'
@@ -195,9 +195,10 @@ export default React.memo(function DisciplineForm (props) {
           />
         </div>
 
-        <div className='p-col-12 flex p-justify-end'>
-          <Button type='submit' label='Adicionar' icon='pi pi-check' />
-        </div>
+        <AddUpdateAndCancelButton
+          onCancel={props.onCancel}
+          updating={props.dataToUpdate}
+        />
       </div>
     </form>
   )

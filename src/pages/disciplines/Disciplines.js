@@ -46,12 +46,16 @@ export default React.memo(function Courses () {
   )
 
   const [selectedDiscip, setSelectedDiscip] = React.useState()
-
+  const handelCancelForm = React.useCallback(
+    () => setSelectedDiscip(undefined),
+    []
+  )
   return (
     <>
       <DisciplineForm
         onSubmit={handleSubmit}
         onUpdate={handleUpdateDisciplines}
+        onCancel={handelCancelForm}
         dataToUpdate={selectedDiscip}
       />
 
@@ -61,7 +65,12 @@ export default React.memo(function Courses () {
         onSelectionChange={e => setSelectedDiscip(e.value)}
       >
         <Column field='name' header='Nome da disciplina' {...TABLE_FIlTER} />
-        <Column field='teachers' header='Professores' body={nameTemplate} />
+        <Column
+          field='teachers'
+          header='Professores'
+          body={nameTemplate}
+          selection={selectedDiscip}
+        />
         <Column
           field='courses'
           header='Cursos'

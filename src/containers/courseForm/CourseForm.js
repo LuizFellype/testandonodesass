@@ -1,8 +1,8 @@
 import React from 'react'
 import { InputText } from 'primereact/inputtext'
-import { Button } from 'primereact/button'
 import { getAllDisciplines } from '../../services/clients'
 import { useAutocomplete } from '../../components/useAutocomplete/useAutocomplete'
+import { AddUpdateAndCancelButton } from '../../components/addUpdateButton/AddUpdateButton'
 
 const FIELD_ID = {
   name: 'name',
@@ -94,13 +94,11 @@ export default React.memo(function CourseForm (props) {
           <label>Disciplinas</label>
           {Autocomplete}
         </div>
-        <div className='p-col-12 flex p-justify-end'>
-          <Button
-            type='submit'
-            label={props.dataToUpdate ? 'Atualizar' : 'Adicionar'}
-            icon='pi pi-check'
-          />
-        </div>
+
+        <AddUpdateAndCancelButton
+          onCancel={props.onCancel}
+          updating={props.dataToUpdate}
+        />
       </div>
     </form>
   )

@@ -1,12 +1,12 @@
 import { Calendar } from 'primereact/calendar'
 import React from 'react'
 import { InputText } from 'primereact/inputtext'
-import { Button } from 'primereact/button'
 import { useAutocomplete } from '../../components/useAutocomplete/useAutocomplete'
 import { formatDate } from '../../utils/formatDate'
 import { getAllClasses, getAllDisciplines } from '../../services/clients'
 import { displayClass } from '../../utils/displayClass'
 import { TYPES } from '../../utils/consts'
+import { AddUpdateAndCancelButton } from '../../components/addUpdateButton/AddUpdateButton'
 
 const FIELD_ID = {
   name: 'name',
@@ -249,11 +249,11 @@ export default React.memo(function UserForm (props) {
             {DisciplinesField}
           </div>
         )}
-        {/* {typeOfUserForm} */}
 
-        <div className='p-col-12 flex p-justify-end'>
-          <Button type='submit' label='Adicionar' icon='pi pi-check' />
-        </div>
+        <AddUpdateAndCancelButton
+          onCancel={props.onCancel}
+          updating={props.dataToUpdate}
+        />
       </div>
     </form>
   )

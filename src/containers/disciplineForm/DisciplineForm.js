@@ -1,9 +1,9 @@
 import React from 'react'
 import { InputText } from 'primereact/inputtext'
-import { Button } from 'primereact/button'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { useAutocomplete } from '../../components/useAutocomplete/useAutocomplete'
 import { getAllProfessors } from '../../services/clients'
+import { AddUpdateAndCancelButton } from '../../components/addUpdateButton/AddUpdateButton'
 
 const FIELD_ID = {
   name: 'name',
@@ -87,9 +87,11 @@ export default React.memo(function DisciplineForm (props) {
           <label htmlFor={FIELD_ID.references}>Referências</label>
           <InputTextarea id={FIELD_ID.references} type='text' rows={4} />
         </div>
-        <div className='p-col-12 flex p-justify-end'>
-          <Button type='submit' label='Adicionar' icon='pi pi-check' />
-        </div>
+
+        <AddUpdateAndCancelButton
+          onCancel={props.onCancel}
+          updating={props.dataToUpdate}
+        />
       </div>
     </form>
   )
