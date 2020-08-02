@@ -1,3 +1,11 @@
+## How To Run this project
+
+- Clone the Repo
+- `cd iColege`
+- `yarn install`
+- `yarn start`
+- Go to http://localhost:3000
+
 ## Notes
 
 ### Person
