@@ -6,12 +6,15 @@ import {
   addProfessor,
   getAllProfessors,
   getAllStudents,
-  addStudent
+  addStudent,
+  updateProfessor,
+  updateStudent
 } from '../../services/clients'
 import { itemTemplate } from '../../utils/itemTemplate'
 import UserForm from '../../containers/userForm/UserForm'
 import { displayClass } from '../../utils/displayClass'
 import { TABLE_FIlTER, TYPES } from '../../utils/consts'
+import { handleUpdate } from '../../utils/handleUpdate'
 
 const classTemplate = itemTemplate('name', (acc, item, idx) => {
   return `${acc}${idx === 0 ? '' : ', '}${displayClass(item)}`
@@ -59,14 +62,37 @@ export default React.memo(function Users () {
     // eslint-disable-next-line
     [students, professors]
   )
+  const handleUpdateUser = React.useCallback(
+    (userToUpdate, userType) => {
+      if (userType === TYPES.prof) {
+        handleUpdate(professors, setProfessors, updateProfessor)(userToUpdate)
+      } else {
+        handleUpdate(students, setStudents, updateStudent)(userToUpdate)
+      }
+    },
+    // eslint-disable-next-line
+    [students, professors]
+  )
 
+  const [userSelected, setUserSelected] = React.useState()
+  const filterDataTableProps = React.useMemo(
+    () => ({
+      selectionMode: 'single',
+      onSelectionChange: e => setUserSelected(e.value)
+    }),
+    []
+  )
   return (
     <>
-      <UserForm onSubmit={handleSubmit} />
+      <UserForm
+        onSubmit={handleSubmit}
+        onUpdate={handleUpdateUser}
+        dataToUpdate={userSelected}
+      />
 
       <TabView>
         <TabPanel header='Alunos'>
-          <DataTable value={students}>
+          <DataTable value={students} {...filterDataTableProps} responsive>
             <Column field='code' header='Código' {...TABLE_FIlTER} />
             <Column field='name' header='Nome' {...TABLE_FIlTER} />
             <Column field='email' header='E-mail' />
@@ -75,7 +101,7 @@ export default React.memo(function Users () {
           </DataTable>
         </TabPanel>
         <TabPanel header='Professores'>
-          <DataTable value={professors}>
+          <DataTable value={professors} {...filterDataTableProps} responsive>
             <Column field='name' header='Nome' {...TABLE_FIlTER} />
             <Column field='email' header='E-mail' />
             <Column field='cpf' header='CPF' {...TABLE_FIlTER} />

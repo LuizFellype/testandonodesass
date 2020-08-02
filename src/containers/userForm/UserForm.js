@@ -40,11 +40,11 @@ const autoCompleteParams = {
 export default React.memo(function UserForm (props) {
   const [birthDate, setBirthDate] = React.useState(null)
   const {
-    data: { selectedGender, setGender, setFilteredGender },
+    data: { selectedGender, setGender, setFilteredGender, setSelectedGender },
     Autocomplete
   } = useAutocomplete(autoCompleteParams.gender)
   const {
-    data: { selectedType, setType, setFilteredType },
+    data: { selectedType, setType, setFilteredType, setSelectedType },
     Autocomplete: UserTypeField
   } = useAutocomplete(autoCompleteParams.userType)
 
@@ -53,13 +53,20 @@ export default React.memo(function UserForm (props) {
       Disciplines,
       selectedDisciplines,
       setDisciplines,
-      setFilteredDisciplines
+      setFilteredDisciplines,
+      setSelectedDisciplines
     },
     Autocomplete: DisciplinesField
   } = useAutocomplete(autoCompleteParams.disciplines)
 
   const {
-    data: { Classes, selectedClasses, setClasses, setFilteredClasses },
+    data: {
+      Classes,
+      selectedClasses,
+      setClasses,
+      setFilteredClasses,
+      setSelectedClasses
+    },
     Autocomplete: ClassesField
   } = useAutocomplete(autoCompleteParams.classes)
 
@@ -97,6 +104,42 @@ export default React.memo(function UserForm (props) {
 
     // eslint-disable-next-line
   }, [selectedType])
+
+  // fill form when have data to update
+  React.useEffect(() => {
+    if (props.dataToUpdate) {
+      const {
+        name,
+        cpf,
+        birthDate: _birthDate,
+        gender,
+        email,
+        phone,
+        disciplines,
+        enroled,
+        classes
+      } = props.dataToUpdate
+
+      // If has disciplines It is professor
+      if (disciplines) {
+        setSelectedType(TYPES.prof)
+        setSelectedClasses(classes.map(displayClass))
+        setSelectedDisciplines(disciplines.map(({ name }) => name))
+      } else {
+        setSelectedType(TYPES.student)
+        setSelectedClasses(enroled.map(displayClass))
+      }
+
+      setSelectedGender(gender)
+      document.getElementById(FIELD_ID.name).value = name
+      document.getElementById(FIELD_ID.email).value = email
+      document.getElementById(FIELD_ID.cpf).value = cpf
+      document.getElementById(FIELD_ID.phone).value = phone
+      setBirthDate(_birthDate)
+    }
+
+    // eslint-disable-next-line
+  }, [props.dataToUpdate])
 
   const hadleSubmit = async ev => {
     ev.preventDefault()

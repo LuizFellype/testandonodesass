@@ -5,7 +5,7 @@ const fakeProfessors = [
     name: 'Professor 1',
     cpf: '12897512326',
     birthDate: '22/06/1999',
-    sex: 'M',
+    gender: 'Mulher',
     email: 'prof1@gmail.com',
     phone: '27988521802',
     classes: [],
@@ -16,7 +16,7 @@ const fakeProfessors = [
     name: 'Professor 2',
     cpf: '22897512326',
     birthDate: '23/07/1999',
-    sex: 'F',
+    gender: 'Homem',
     email: 'prof2@gmail.com',
     phone: '27998521112',
     classes: [],
@@ -102,7 +102,7 @@ const fakeStudents = [
     name: 'Aluno 1',
     cpf: '12897512326',
     birthDate: '22/06/1999',
-    sex: 'M',
+    gender: 'Mulher',
     email: 'aluno1@gmail.com',
     phone: '27988521802',
     enroled: [fakeClasses[0]],
@@ -113,7 +113,7 @@ const fakeStudents = [
     name: 'Aluno 2',
     cpf: '22897512326',
     birthDate: '23/07/1999',
-    sex: 'F',
+    gender: 'Homem',
     email: 'aluno2@gmail.com',
     phone: '27998521112',
     enroled: [],
@@ -144,6 +144,9 @@ export const addProfessor = async professorToAdd => {
   const fakeProfessorCreated = { ...professorToAdd, id: new Date().getTime() }
   return fakeProfessorCreated
 }
+export const updateProfessor = async professorToUpdate => {
+  return professorToUpdate
+}
 
 // export const getAllProfessorsByDiscipline = async (disciplineId) => {
 export const getAllProfessorsByDiscipline = async () => {
@@ -156,6 +159,9 @@ export const getAllStudents = async () => {
 export const addStudent = async studentToAdd => {
   const fakeProfessorCreated = { ...studentToAdd, id: new Date().getTime() }
   return fakeProfessorCreated
+}
+export const updateStudent = async studentToUpdate => {
+  return studentToUpdate
 }
 
 export const getAllClasses = async () => {

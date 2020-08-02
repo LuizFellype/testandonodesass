@@ -39,6 +39,7 @@ export default React.memo(function CourseForm (props) {
     // eslint-disable-next-line
   }, [])
 
+  // fill form when have data to update
   React.useEffect(() => {
     if (props.dataToUpdate) {
       document.getElementById(FIELD_ID.name).value = props.dataToUpdate.name

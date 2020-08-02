@@ -105,6 +105,7 @@ export default React.memo(function DisciplineForm (props) {
     // eslint-disable-next-line
   }, [selectedDisciplines])
 
+  // fill form when have data to update
   React.useEffect(() => {
     if (props.dataToUpdate) {
       const {
