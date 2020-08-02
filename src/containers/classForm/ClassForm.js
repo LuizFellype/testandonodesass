@@ -41,7 +41,8 @@ export default React.memo(function DisciplineForm (props) {
       Disciplines,
       selectedDisciplines,
       setDisciplines,
-      setFilteredDisciplines
+      setFilteredDisciplines,
+      setSelectedDisciplines
     },
     Autocomplete: DisciplineField
   } = useAutocomplete(autoCompleteParams.disciplines)
@@ -53,7 +54,7 @@ export default React.memo(function DisciplineForm (props) {
   )
 
   const {
-    data: { Prof, selectedProf, setProf, setFilteredProf },
+    data: { Prof, selectedProf, setProf, setFilteredProf, setSelectedProf },
     Autocomplete: ProfessorsField
   } = useAutocomplete({
     ...autoCompleteParams.professors,
@@ -61,7 +62,13 @@ export default React.memo(function DisciplineForm (props) {
   })
 
   const {
-    data: { Shift, selectedShift, setShift, setFilteredShift },
+    data: {
+      Shift,
+      selectedShift,
+      setShift,
+      setFilteredShift,
+      setSelectedShift
+    },
     Autocomplete: ShiftField
   } = useAutocomplete(autoCompleteParams.shift)
 
@@ -98,6 +105,26 @@ export default React.memo(function DisciplineForm (props) {
     // eslint-disable-next-line
   }, [selectedDisciplines])
 
+  React.useEffect(() => {
+    if (props.dataToUpdate) {
+      const {
+        discipline,
+        teacher,
+        shift,
+        maxVacancies,
+        startDate: _startDate
+      } = props.dataToUpdate
+
+      setSelectedDisciplines(discipline.name)
+      setSelectedProf(teacher.name)
+      setSelectedShift(shift)
+      document.getElementById(FIELD_ID.maxVacancies).value = maxVacancies
+      setStartDate(_startDate)
+    }
+
+    // eslint-disable-next-line
+  }, [props.dataToUpdate])
+
   const hadleSubmit = async ev => {
     ev.preventDefault()
     // TO DO: input add validation
@@ -118,6 +145,14 @@ export default React.memo(function DisciplineForm (props) {
       shift,
       startDate: _startDate,
       code
+    }
+
+    if (props.dataToUpdate) {
+      return props.onUpdate({
+        ...newClass,
+        id: props.dataToUpdate.id,
+        code: props.dataToUpdate.code
+      })
     }
 
     props.onSubmit(newClass)
@@ -154,6 +189,7 @@ export default React.memo(function DisciplineForm (props) {
             value={startDate}
             placeholder='Selecione uma data...'
             onChange={e => setStartDate(e.value)}
+            dateFormat='dd/mm/yy'
             required
           />
         </div>

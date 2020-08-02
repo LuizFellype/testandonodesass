@@ -1,28 +1,15 @@
 import React from 'react'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
-import { addClass, getAllClasses } from '../../services/clients'
+import { addClass, getAllClasses, updateClass } from '../../services/clients'
 import ClassForm from '../../containers/classForm/ClassForm'
 import { TABLE_FIlTER } from '../../utils/consts'
-
-// const startDateTemplate = (rowData, col) => {
-//   const date = new Date(rowData[col.field])
-//   const day = date.getDate()
-//   const month = date.getMonth()
-//   const year = date.getFullYear()
-
-//   return (
-//     <span>
-//       {day < 10 ? `0${day}` : day}/{day < 10 ? `0${month}` : month}/{year}
-//     </span>
-//   )
-// }
 const nameTemplate = (rowData, col) => {
   const professor = rowData[col.field] || {}
 
   return <span>{professor.name}</span>
 }
-export default React.memo(function Courses () {
+export default React.memo(function Classes () {
   const [classes, setClasses] = React.useState([])
 
   React.useEffect(() => {
@@ -49,12 +36,42 @@ export default React.memo(function Courses () {
     },
     [classes]
   )
+  const handleUpdate = (data, setData, updateRealData) => classToUpdate => {
+    const classesCopy = [...data]
+
+    const dataUpdated = data.map(unitData =>
+      unitData.id === classToUpdate.id ? classToUpdate : unitData
+    )
+
+    setData(dataUpdated)
+    updateRealData(classToUpdate)
+      .then(() => null)
+      .catch(error => {
+        console.log('To do: Show some error', error)
+        setClasses(classesCopy)
+      })
+  }
+
+  const handleUpdateClass = React.useCallback(
+    handleUpdate(classes, setClasses, updateClass),
+    [classes]
+  )
+
+  const [classSelected, setClassSelected] = React.useState()
 
   return (
     <>
-      <ClassForm onSubmit={handleSubmit} />
+      <ClassForm
+        onSubmit={handleSubmit}
+        dataToUpdate={classSelected}
+        onUpdate={handleUpdateClass}
+      />
 
-      <DataTable value={classes}>
+      <DataTable
+        value={classes}
+        selectionMode='single'
+        onSelectionChange={e => setClassSelected(e.value)}
+      >
         <Column field='code' header='Código' {...TABLE_FIlTER} />
         <Column field='shift' header='Turno' {...TABLE_FIlTER} />
         <Column field='startDate' header='Data de início' {...TABLE_FIlTER} />

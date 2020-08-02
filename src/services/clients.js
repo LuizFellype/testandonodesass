@@ -168,3 +168,6 @@ export const addClass = async classToAdd => {
   }
   return fakeClassCreated
 }
+export const updateClass = async classToUpdate => {
+  return classToUpdate
+}

@@ -1,4 +1,6 @@
 export const formatDate = dateToFormat => {
+  if (typeof dateToFormat === 'string') return dateToFormat
+
   const _date = new Date(dateToFormat)
 
   const _day = _date.getDate()

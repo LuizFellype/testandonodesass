@@ -5,6 +5,7 @@ import { Column } from 'primereact/column'
 import { addCourse, updateCourse, getAllCourses } from '../../services/clients'
 import { itemTemplate } from '../../utils/itemTemplate'
 import { TABLE_FIlTER } from '../../utils/consts'
+import { handleUpdate } from '../../utils/handleUpdate'
 
 const disciplineTemplate = itemTemplate('name')
 
@@ -34,22 +35,9 @@ export default React.memo(function Courses () {
     },
     [courses]
   )
+
   const handleUpdateCourse = React.useCallback(
-    courseToUpdate => {
-      const coursesCopy = [...courses]
-
-      const coursesUpdated = courses.map(course =>
-        course.id === courseToUpdate.id ? courseToUpdate : course
-      )
-
-      setCourses(coursesUpdated)
-      updateCourse(courseToUpdate)
-        .then(() => null)
-        .catch(error => {
-          console.log('To do: Show some error', error)
-          setCourses(coursesCopy)
-        })
-    },
+    handleUpdate(courses, setCourses, updateCourse),
     [courses]
   )
 
